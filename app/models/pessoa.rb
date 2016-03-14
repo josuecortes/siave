@@ -9,10 +9,12 @@ class Pessoa < ActiveRecord::Base
 
 	accepts_nested_attributes_for :contatos, allow_destroy: true
 
-	validates_presence_of :nome, :data_nascimento, :sexo, :cep, :numero, :documentacao
+	validates_presence_of :nome, :data_nascimento, :sexo, :cep, :numero
 
 	validates_uniqueness_of :nome, :scope => [:data_nascimento]
 
+	validates_presence_of :numero_documento, :if => :documento
 
+  
 
 end
