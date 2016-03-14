@@ -1,0 +1,4 @@
+<%= simple_fields_for :pessoa do |f| %>
+	<%= f.input :tipo_deficiencia, collection: @lista_deficiencias, as: :select, :include_blank => false %>
+	
+<% end %>

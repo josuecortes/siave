@@ -1,0 +1,30 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes do Desdobramento <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @desdobramento.descricao %>
+</p>
+
+<% if @desdobramento.tipo_agressor.blank? %>
+  <p>
+    <strong>Tipo de Ocorrência:</strong>
+    <%= detalhes2(@desdobramento.tipo_ocorrencia, :descricao) %>
+  </p>
+<% else %>
+  <p>
+    <strong>Tipo de Agressor:</strong>
+    <%= detalhes2(@desdobramento.tipo_agressor, :descricao) %>
+  </p>
+<% end %>
+
+<%= link_to link_icone('voltar'), desdobramentos_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_desdobramento_path(@desdobramento), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_desdobramento_path, :class=> 'btn btn-success', :title=>"Nova desdobramento" %>
+
+

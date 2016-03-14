@@ -1,0 +1,89 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes da Pessoa <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @pessoa.nome %>
+</p>
+
+<p>
+  <strong>Data nascimento:</strong>
+  <%= data_br(@pessoa.data_nascimento) %>
+</p>
+
+<p>
+  <strong>Sexo:</strong>
+  <%= @pessoa.sexo %>
+</p>
+
+<p>
+  <strong>Raca:</strong>
+  <%= @pessoa.raca %>
+</p>
+
+<p>
+  <strong>Escolaridade:</strong>
+  <%= @pessoa.escolaridade %>
+</p>
+
+<p>
+  <strong>Documento:</strong>
+  <%= simnao(@pessoa.documento) %>
+</p>
+
+<p>
+  <strong>Tipo documento:</strong>
+  <%= @pessoa.tipo_documento %>
+</p>
+
+<p>
+  <strong>Numero documento:</strong>
+  <%= @pessoa.numero_documento %>
+</p>
+
+<p>
+  <strong>Deficiente:</strong>
+  <%= simnao(@pessoa.deficiente) %>
+</p>
+
+<p>
+  <strong>Tipo deficiencia:</strong>
+  <%= @pessoa.tipo_deficiencia %>
+</p>
+
+<p>
+  <strong>Nome responsavel:</strong>
+  <%= @pessoa.nome_responsavel %>
+</p>
+
+<p>
+  <strong>Cep:</strong>
+  <%= @pessoa.cep %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @pessoa.numero %>
+</p>
+
+<p>
+  <strong>Complemento:</strong>
+  <%= @pessoa.complemento %>
+</p>
+
+<p>
+  <strong>Contatos:</strong>
+  <% @pessoa.contatos.each do |c| %>
+    <%= c.tipo %> - <%= c.numero %><br/>
+  <% end %>
+</p>
+
+<%= link_to link_icone('voltar'), pessoas_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_pessoa_path(@pessoa), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_pessoa_path, :class=> 'btn btn-success', :title=>"Nova Pessoa" %>
+

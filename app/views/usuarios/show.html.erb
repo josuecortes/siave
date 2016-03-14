@@ -1,0 +1,49 @@
+<% content_for :titulo do %>
+  <h4>
+  	<strong>
+    	Detalhes do Usuário <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @usuario.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @usuario.email %>
+</p>
+
+<p>
+  <strong>Cpf:</strong>
+  <%= @usuario.cpf %>
+</p>
+
+<p>
+  <strong>Escola:</strong>
+  <%= detalhes2(@usuario.escola, :nome) %>
+</p>
+
+<p>
+  <strong>Regras:</strong>
+  <% @usuario.roles.each do |r| %>
+  	<%= icone_permissao(r.nome) %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Ativo:</strong>
+  <%= simnao(@usuario.ativo) %>
+</p>
+
+<p>
+  <strong>Mudar Senha:</strong>
+  <%= simnao(@usuario.mudar_senha) %>
+</p>
+
+<%= link_to link_icone('voltar'), usuarios_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_usuario_path(@usuario), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('novo'), new_usuario_path, :class=> 'btn btn-success', :title=>"Novo Usuário" %>
+

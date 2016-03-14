@@ -1,0 +1,31 @@
+<!-- Header -->
+<%= render 'layouts/navigation' %>
+<!-- /Header -->
+
+<!-- Main -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'layouts/menu_lateral' %>
+    </div>
+
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="panel panel-default">
+            <div class="panel-heading"><%= yield :titulo %></div>
+            <div class="panel-body">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Main -->
+
+<footer class="text-center"><a href="http://siave.seed.ap.gov.br"> Sistema de Informação de Agressão e Violencia nas Escolas no Estado do Amapá - <strong>SIAVE/AP <br/> SEED/<%= DateTime.now.year %></strong></a></footer>
+

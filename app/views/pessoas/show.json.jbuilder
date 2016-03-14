@@ -1,0 +1,1 @@
+json.extract! @pessoa, :id, :nome, :data_nascimento, :sexo, :raca, :escolaridade, :tipo_documento, :numero_documento, :deficiente, :tipo_deficiencia, :nome_responsavel, :cep, :numero, :complemento, :created_at, :updated_at

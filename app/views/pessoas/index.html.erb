@@ -1,0 +1,58 @@
+<%- model_class = User -%>
+
+<% content_for :titulo do %>
+  <ul class="list-inline pull-right">
+    <%= search_form_for @q, :url=>pessoas_url,  :class=>'navbar-form navbar-right', :role=>'search' do |f| %>
+      
+      <!-- NOVO -->
+      <%= link_to link_icone('nova'), new_pessoa_path, :class=> 'btn btn-success', :title=>"Nova Pessoa" %>
+      <!-- /NOVO -->
+
+      <%= f.search_field :nome_cont, :class=>'form-control', :placeholder=>'Nome' %>
+      <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+
+    <% end %>
+  </ul>
+  <h4>
+    <strong>
+      Lista de Pessoas <i class="glyphicon glyphicon-user"></i>
+    </strong>
+  </h4>
+<% end %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data nascimento</th>
+      <th>Tipo documento</th>
+      <th>Numero documento</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pessoas.each do |pessoa| %>
+      <tr>
+        <td><%= pessoa.nome %></td>
+        <td><%= data_br(pessoa.data_nascimento) %></td>
+        <td><%= pessoa.tipo_documento %></td>
+        <td><%= pessoa.numero_documento %></td>
+        <td>
+          <%= link_to link_icone('detalhes'),
+                    pessoa_path(pessoa), :class => 'btn btn-default', :title=>"Detalhes" %>
+          <%= link_to link_icone('editar'),
+                    edit_pessoa_path(pessoa), :class => 'btn btn-primary', :title=>"Editar" %>
+          <% if can? :delete, pessoa %>
+            <%= link_to link_icone('apagar'), pessoa_path(pessoa), :class=>"btn btn-danger", method: :delete, data: { confirm: 'Você está certo disso?' }, :title=>"Apagar" %> 
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<center>
+  <%= will_paginate @pessoas, renderer: BootstrapPagination::Rails %>
+</center>

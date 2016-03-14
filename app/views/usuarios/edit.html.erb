@@ -1,0 +1,42 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Editando Usuário <%= link_icone('editar') %>
+    </strong>
+  </h4>
+<% end %>
+
+<%= simple_form_for @usuario, :url=>usuario_path(@usuario) do |f| %>
+
+  <%= f.input :name, :label=>"Nome" %>
+
+  <%= f.input :cpf %>
+
+  <%= f.input :email %>
+
+  <%= f.input :escola_nome, :url => autocomplete_escola_nome_usuarios_path, :as => :autocomplete, :id_element => "#escola_id" ,:input_html=>{:value=>(@usuario.escola.nome if @usuario.escola)}%>
+
+  <%= f.input :escola_id, :as => :hidden, :input_html => { :id => "escola_id"} %>
+
+  <%= 
+    #f.association :escola, collection: Escola.order([:nome]), :label=>"Escola", label_method: :nome, value_method: :id, include_blank: true 
+  %>
+
+  <%=
+    #f.text_field :escola_id,  data: {autocomplete_source: Escola.order(:nome).map(&:nome)} 
+  %>
+
+  <%= 
+    #f.input :nome_escola, data: {autocomplete_source: Escola.order(:nome).map(&:nome)} 
+  %>
+  
+  <% if can? :manage, Role %>
+    <%= f.input :role_ids, :label=>"Permissões", :collection=>Role.accessible_by(current_ability).order('nome ASC').collect {|d| [d.nome, d.id]}, as: :check_boxes %>
+  <% end %>
+  
+  <div class="form-actions">
+    <%= f.button :submit, 'Atualizar Usuário', :class=>'btn btn-primary' %>
+    <%= link_to 'Voltar', usuarios_path, :class=>'btn btn-default' %>
+  </div>
+
+<% end %>

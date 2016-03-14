@@ -1,0 +1,12 @@
+<%= simple_form_for(@tipo_agressor) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :descricao %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class=>'btn btn-primary' %>
+    <%= link_to 'Voltar', tipo_agressores_path, :class=>'btn btn-default' %>
+  </div>
+<% end %>

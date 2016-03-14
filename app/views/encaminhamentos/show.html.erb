@@ -1,0 +1,17 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes do Encaminhamento <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @encaminhamento.descricao %>
+</p>
+
+<%= link_to link_icone('voltar'), encaminhamentos_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_encaminhamento_path(@encaminhamento), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_encaminhamento_path, :class=> 'btn btn-success', :title=>"Nova encaminhamento" %>
+

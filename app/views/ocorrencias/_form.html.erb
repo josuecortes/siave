@@ -1,0 +1,61 @@
+<%= simple_form_for(@ocorrencia) do |f| %>
+  <%= f.error_notification %>
+
+  <div id="notice">
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :numero_protocolo %>
+
+    <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia.descricao if @ocorrencia.tipo_ocorrencia)} %>  
+
+    <div id="desdobramento_tipo_ocorrencia">
+      
+    </div>
+    
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-6">
+            <%= f.input :agredido_nome, :label=>"Pessoa Agredida", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agredido_id" ,:input_html=>{:value=>(@ocorrencia.agredido.nome if @ocorrencia.agredido)}%>
+
+            <%= f.input :agredido_id, :as => :hidden, :input_html => { :id => "agredido_id"} %>   
+          </div>
+          <div class="col-md-6">
+            <%= f.input :agredido_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
+
+            <%= f.input :agressor_id, :as => :hidden, :input_html => { :id => "agressor_id"} %>
+          </div>
+        </div>
+
+        <%= link_to link_icone2('nova', 'Cadastrar Pessoa'), '#myModal', :class=> 'btn btn-success', :title=>"Nova Pessoa", :'data-toggle'=>"modal", :'data-target'=>"#myModal"  %>  
+        
+        
+      </div>
+
+    </div>
+
+    <br/>
+
+    <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: false %>
+
+    <%= f.input :sob_influencia, collection: @lista_influencias, as: :select, :include_blank => false %>
+
+    <%= f.association :encaminhamento, collection: Encaminhamento.order([:descricao]), :label=>"Encaminhamento", label_method: :descricao, value_method: :id, include_blank: false %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class=>'btn btn-primary' %>
+    <%= link_to 'Voltar', ocorrencias_path, :class=>'btn btn-default' %>
+  </div>
+<% end %>
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <%= render "form_pessoa" %>
+</div>

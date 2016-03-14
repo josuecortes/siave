@@ -1,0 +1,32 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Editando Minha Conta <%= link_icone('editar') %>
+    </strong>
+  </h4>
+<% end %>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
+  <%= devise_error_messages! %>
+  <%= f.input :name, :label=>"Nome" %>
+  <%= f.input :cpf %>
+  <%= f.input :email %>
+  <fieldset class="fieldsetcomborda">
+    <p><strong>* Deixe estes campos em branco se você não quiser alterar sua senha.</strong></p>
+    <%= f.input :password, :label=>"Senha" %>
+    <%= f.input :password_confirmation, :label=>"Confirmar Senha"%>
+  </fieldset>
+  <fieldset class="fieldsetcomborda">
+    <p><strong>* Você deve digitar a sua senha atual para fazer alterações.</stong></p>
+    <%= f.input :current_password, :label=>"Senha Atual", :required=>true %>
+  </fieldset>
+  <div class="form-actions">
+    <%= f.button :submit, 'Atualizar Minha Conta', :class=>'btn btn-primary' %>
+  </div>
+<% end %>
+
+
+
+
+
+

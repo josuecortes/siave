@@ -1,0 +1,52 @@
+<%- model_class = Encaminhamento -%>
+
+<% content_for :titulo do %>
+  <ul class="list-inline pull-right">
+    <%= search_form_for @q, :url=>encaminhamentos_url,  :class=>'navbar-form navbar-right', :role=>'search' do |f| %>
+      
+      <!-- NOVO -->
+      <%= link_to link_icone('novo'), new_encaminhamento_path, :class=> 'btn btn-success', :title=>"Novo Encaminhamento" %>
+      <!-- /NOVO -->
+
+      <%= f.search_field :descricao_cont, :class=>'form-control', :placeholder=>'Descricao' %>
+      <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+
+    <% end %>
+  </ul>
+  <h4>
+    <strong>
+      Lista de Encaminhamentos <i class="glyphicon glyphicon-file"></i>
+    </strong>
+  </h4>
+<% end %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Descricao</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @encaminhamentos.each do |encaminhamento| %>
+      <tr>
+        <td><%= encaminhamento.descricao %></td>
+        <td>
+          <%= link_to link_icone('detalhes'),
+                    encaminhamento_path(encaminhamento), :class => 'btn btn-default', :title=>"Detalhes" %>
+          <%= link_to link_icone('editar'),
+                    edit_encaminhamento_path(encaminhamento), :class => 'btn btn-primary', :title=>"Editar" %>
+          <% if can? :delete, encaminhamento %>
+            <%= link_to link_icone('apagar'), encaminhamento_path(encaminhamento), :class=>"btn btn-danger", method: :delete, data: { confirm: 'Você está certo disso?' }, :title=>"Apagar" %> 
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<center>
+  <%= will_paginate @encaminhamentos, renderer: BootstrapPagination::Rails %>
+</center>

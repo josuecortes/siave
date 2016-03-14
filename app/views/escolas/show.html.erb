@@ -1,0 +1,43 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes da Escola <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @escola.codigo %>
+</p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @escola.nome %>
+</p>
+
+<p>
+  <strong>Cep:</strong>
+  <%= @escola.cep %>
+</p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @escola.numero %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @escola.email %>
+</p>
+
+<p>
+  <strong>Contato:</strong>
+  <%= @escola.contato %>
+</p>
+
+<%= link_to link_icone('voltar'), escolas_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_escola_path(@escola), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_escola_path, :class=> 'btn btn-success', :title=>"Nova escola" %>
+
+

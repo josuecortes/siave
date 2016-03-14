@@ -1,0 +1,9 @@
+I"´(function() {
+  jQuery(function() {
+    return $('#user_nome_escola').autocomplete({
+      source: $('#user_nome_escola').data('autocomplete-source')
+    });
+  });
+
+}).call(this);
+:ET

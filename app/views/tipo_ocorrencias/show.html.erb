@@ -1,0 +1,16 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes do Tipo de Ocorrência <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @tipo_ocorrencia.descricao %>
+</p>
+
+<%= link_to link_icone('voltar'), tipo_ocorrencias_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_tipo_ocorrencia_path(@tipo_ocorrencia), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_tipo_ocorrencia_path, :class=> 'btn btn-success', :title=>"Nova tipo_ocorrencia" %>

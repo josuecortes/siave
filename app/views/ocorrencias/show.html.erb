@@ -1,0 +1,52 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes da Ocorrência <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Número protocolo:</strong>
+  <%= @ocorrencia.numero_protocolo %>
+</p>
+
+<p>
+  <strong>Agredido:</strong>
+  <%= detalhes2(@ocorrencia.agredido, :nome) %>
+</p>
+
+<p>
+  <strong>Agressor:</strong>
+  <%= detalhes2(@ocorrencia.agressor, :nome) %>
+</p>
+
+<p>
+  <strong>Sob influência:</strong>
+  <%= @ocorrencia.sob_influencia %>
+</p>
+
+<p>
+  <strong>Tipo de Ocorrência:</strong>
+  <%= detalhes2(@ocorrencia.tipo_ocorrencia, :descricao) %>
+</p>
+
+<p>
+  <strong>Desdobramento da Ocorrencia:</strong>
+  <%= detalhes2(@ocorrencia.desdobramento_tipo_ocorrencia, :descricao) %>
+</p>
+
+<p>
+  <strong>Tipo de Agressor:</strong>
+  <%= detalhes2(@ocorrencia.tipo_agressor, :descricao) %>
+</p>
+
+<p>
+  <strong>Encaminhamento:</strong>
+  <%= detalhes2(@ocorrencia.encaminhamento, :descricao) %>
+</p>
+
+<%= link_to link_icone('voltar'), ocorrencias_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_ocorrencia_path(@ocorrencia), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_ocorrencia_path, :class=> 'btn btn-success', :title=>"Nova ocorrencia" %>
+

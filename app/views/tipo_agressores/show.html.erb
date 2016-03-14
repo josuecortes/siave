@@ -1,0 +1,16 @@
+<% content_for :titulo do %>
+  <h4>
+    <strong>
+      Detalhes do Tipo de Agressor <%= link_icone('detalhes') %>
+    </strong>
+  </h4>
+<% end %>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @tipo_agressor.descricao %>
+</p>
+
+<%= link_to link_icone('voltar'), tipo_agressores_path, :class=>'btn btn-default', :title=>"Voltar" %> 
+<%= link_to link_icone('editar'), edit_tipo_agressor_path(@tipo_agressor), :class=>"btn btn-primary", :title=>"Editar" %> 
+<%= link_to link_icone('nova'), new_tipo_agressor_path, :class=> 'btn btn-success', :title=>"Novo Tipo de Agressor" %>

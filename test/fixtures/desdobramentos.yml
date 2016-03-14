@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  descricao: MyString
+  tipo_ocorrencia_id: 1
+  tipo_agressor_id: 1
+
+two:
+  descricao: MyString
+  tipo_ocorrencia_id: 1
+  tipo_agressor_id: 1

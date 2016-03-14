@@ -1,0 +1,14 @@
+<div class="authform">
+
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
+    <h3>Perdeu sua senha?</h3>
+    <p>Nós enviaremos instruções de redefinição de senha.</p>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= link_to 'Login', new_session_path(resource_name), class: 'right'  %>
+      <%= f.label :email, "E-mail" %>
+      <%= f.email_field :email, :autofocus => true, class: 'form-control' %>
+    </div>
+     <%= f.submit 'Resetar Senha', :class => 'button right' %>
+  <% end %>
+</div>
