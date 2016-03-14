@@ -9,10 +9,10 @@
     <div id="atributos_tipo">
       <%if !@desdobramento.new_record?%>
         <%if @desdobramento.tipo and @desdobramento.tipo=="Ocorrencia"%>
-        <%= f.input :tipo_ocorrencia_id, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_ocorrencia if @desdobramento.tipo_ocorrencia)} %>
-        <%else%>
-          <%= f.input :tipo_agressor_id, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_agressor.descricao if @desdobramento.tipo_agressor)} %>
-        <%end%>
+          <%= f.input :tipo_ocorrencia_id, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_ocorrencia if @desdobramento.tipo_ocorrencia)} %>
+          <%else%>
+            <%= f.input :tipo_agressor_id, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_agressor.descricao if @desdobramento.tipo_agressor)} %>
+          <%end%>
       <%end%>
       
     </div>
