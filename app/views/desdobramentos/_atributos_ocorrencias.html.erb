@@ -1,0 +1,5 @@
+<%= simple_fields_for :desdobramento do |f| %>
+
+	<%= f.input :tipo_ocorrencia_id, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true%>
+
+<% end %>

@@ -9,5 +9,5 @@ class Desdobramento < ActiveRecord::Base
 
 
 
-	validates_presence_of :descricao
+	validates_presence_of :descricao, :tipo
 end

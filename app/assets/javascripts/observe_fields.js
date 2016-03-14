@@ -25,3 +25,12 @@ jQuery(function($) {$("#ocorrencia_tipo_ocorrencia").change(function() {
     });
   });
 });
+
+jQuery(function($) {$("#desdobramento_tipo").change(function() {
+    // make a POST call and replace the content
+    var tipo = $('#desdobramento_tipo').val();
+    jQuery.post("/desdobramentos/atributos_tipo/?tipo=" + tipo, function(data){
+      $("#atributos_tipo").html(data);   
+    });
+  });
+});

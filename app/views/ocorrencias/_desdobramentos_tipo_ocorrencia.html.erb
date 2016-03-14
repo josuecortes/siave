@@ -1,4 +1,21 @@
 <%=simple_fields_for :ocorrencia do |f|%>
-<%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos, :label=>"Desdobramento do Tipo de Ocorrência", include_blank: true, :input_html => {:value=>(@ocorrencia.desdobramento_tipo_ocorrencia.descricao if @ocorrencia.desdobramento_tipo_ocorrencia)} %>  
+<%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos, :label=>"Desdobramento do Tipo de Ocorrência", include_blank: true %>  
 <%end%>
 
+<div id="tipo_desdobramento_ocorrencia">
+
+</div>
+
+
+<script type="text/javascript">
+
+jQuery(function($) {$("#ocorrencia_desdobramento_tipo_ocorrencia_id").change(function() {
+    // make a POST call and replace the content
+    var desdobramento_tipo_ocorrencia = $('#ocorrencia_desdobramento_tipo_ocorrencia_id').val();
+    jQuery.post("/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
+      $("#tipo_desdobramento_ocorrencia").html(data);   
+    });
+  });
+});
+
+</script>

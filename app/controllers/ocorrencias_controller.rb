@@ -31,6 +31,9 @@ class OcorrenciasController < ApplicationController
 
   # GET /ocorrencias/1/edit
   def edit
+    @tipo_ocorrencia = @ocorrencia.tipo_ocorrencia
+    @desdobramentos = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_ocorrencia
+    @tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_ocorrencia
   end
 
   # POST /ocorrencias
@@ -100,8 +103,8 @@ class OcorrenciasController < ApplicationController
 
   def tipo_desdobramento_ocorrencia
     if !params[:desdobramento_tipo_ocorrencia].blank?
-      @desdobramento_tipo_ocorrencia = TipoDesdobramento.find(params[:desdobramento_tipo_ocorrencia])
-      @tipo_desdobramentos_ocorrencia = @desdobramento_tipo_ocorrencia.collect{|t| [t.descricao, t.id]}
+      @desdobramento = Desdobramento.find(params[:desdobramento_tipo_ocorrencia])
+      @tipo_desdobramentos_ocorrencia = @desdobramento.tipo_desdobramentos.collect{|t| [t.descricao, t.id]}
       render :partial => "tipo_desdobramento_ocorrencia"
     else
       render :nothing => true

@@ -1,5 +1,6 @@
 class DesdobramentosController < ApplicationController
   before_action :set_desdobramento, only: [:show, :edit, :update, :destroy]
+  before_filter :colecoes
   load_and_authorize_resource :class=>"Desdobramento", except: :create
 
   # GET /desdobramentos
@@ -65,6 +66,16 @@ class DesdobramentosController < ApplicationController
     end
   end
 
+  def atributos_tipo
+    if params[:tipo] == 'Ocorrencia'
+      render :partial => "atributos_ocorrencias"
+    elsif params[:tipo] == 'Agressoes'
+      render :partial => "atributos_agressoes"
+    else
+      render :nothing => true
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_desdobramento
@@ -73,6 +84,10 @@ class DesdobramentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def desdobramento_params
-      params.require(:desdobramento).permit(:descricao, :tipo_ocorrencia_id, :tipo_agressor_id)
+      params.require(:desdobramento).permit(:descricao, :tipo, :tipo_ocorrencia_id, :tipo_agressor_id)
+    end
+
+    def colecoes
+      @lista_tipos = [['Ocorrencia','Ocorrencia'], ['Agressoes','Agressoes']]
     end
 end

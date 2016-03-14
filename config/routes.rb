@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   
   resources :tipo_desdobramentos
 
-  resources :desdobramentos
+  resources :desdobramentos do
+
+    post :atributos_tipo, :on => :collection
+
+  end
 
   resources :tipo_agressores
 
