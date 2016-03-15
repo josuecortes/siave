@@ -5,27 +5,27 @@
     <%= f.input :nome %>
     <%= f.input :data_nascimento %>
     <%= f.input :sexo, collection: @lista_sexos, as: :select, :include_blank => false %>
-    <%= f.input :raca %>
-    <%= f.input :escolaridade, collection: @lista_escolaridades, as: :select, :include_blank => false %>
+    <%= f.input :raca, collection: @lista_racas, as: :select, :include_blank => true %>
+    <%= f.input :escolaridade, collection: @lista_escolaridades, as: :select, :include_blank => true %>
 
     <%= f.input :documento, collection: @lista_booleans, as: :select, :include_blank => false %>
     
     <div id="atributos_documento">
 
-      <%if !@pessoa.new_record?%>
-        <%if @pessoa.documento and @pessoa.documento==true%>
-          <%= f.input :tipo_ocorrencia_id, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_ocorrencia if @desdobramento.tipo_ocorrencia)} %>
-          <%else%>
-            <%= f.input :tipo_agressor_id, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_agressor.descricao if @desdobramento.tipo_agressor)} %>
-          <%end%>
+      <%if @pessoa.documento and @pessoa.documento==true%>
+        <%= f.input :tipo_documento, collection: @lista_documentos, as: :select, :include_blank => false %>
+        <%= f.input :numero_documento %>
       <%end%>
-
       
     </div>
 
     <%= f.input :deficiente, collection: @lista_booleans, as: :select, :include_blank => false %>
 
     <div id="atributos_deficiente">
+
+      <%if @pessoa.deficiente and @pessoa.deficiente==true%>
+        <%= f.input :tipo_deficiencia, collection: @lista_deficiencias, as: :select, :include_blank => false %>
+      <%end%>
       
     </div>    
     
@@ -47,7 +47,7 @@
       <% end %>
     </div>
     <div class="form-actions">
-      <%= f.link_to_add link_icone2("novo","Adicionar Contato"), :contatos, :data => { :target => "#contatos" }, :class=>'btn btn-success' %>          
+      <%= f.link_to_add link_icone2("novo","Adicionar Contato"), :contatos, :data => { :target => "#contatos" }, :class=>'btn btn-success' %>
     </div>
     <br/>
 

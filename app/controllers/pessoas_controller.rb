@@ -21,7 +21,7 @@ class PessoasController < ApplicationController
   # GET /pessoas/new
   def new
     @pessoa = Pessoa.new
-    #@contato = @pessoa.contatos.new
+    @contato = @pessoa.contatos.build
     
   end
 
@@ -107,5 +107,6 @@ class PessoasController < ApplicationController
       @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'], ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
       @lista_escolaridades = [['Fundamental - Incompleto','Fundamental - Incompleto'], ['Fundamental - Completo','Fundamental - Completo'], ['Medio - Incompleto','Medio - Completo'], ['Superior - Incompleto','Superior - Incompleto'], ['Superior - Completo','Superior - Completo']]
       @lista_contatos = [['Residencial','Residencial'], ['Celular','Celular'], ['Trabalho','Trabalho']]
+      @lista_racas = [['Branca','Branca'], ['Preta','Preta'], ['Parda','Parda'], ['Indígena','Indígena'], ['Amarela','Amarela']]
     end
 end

@@ -1,9 +1,0 @@
-I"™(function() {
-  jQuery(function() {
-    return $('#user_nome_escola').autocomplete({
-      source: ['foo', 'food', 'four']
-    });
-  });
-
-}).call(this);
-:ET

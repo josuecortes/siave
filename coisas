@@ -40,3 +40,47 @@ end
 ######################################
 exemplo de migration
 rails g migration AddPessoaAndAtivoAndMudarSenhaToUser pessoa:references ativo:boolean mudar_senha:boolean
+
+
+
+############### jss
+
+jQuery(function($) {$("#pessoa_documento").change(function() {
+    // make a POST call and replace the content
+    var documento = $('#pessoa_documento').val();
+    jQuery.post("<%=atributos_documento_pessoas_path%>"+"?documento=" + documento, function(data){
+      $("#atributos_documento").html(data);   
+    });
+  });
+});
+
+
+
+jQuery(function($) {$("#pessoa_deficiente").change(function() {
+    // make a POST call and replace the content
+    var deficiente = $('#pessoa_deficiente').val();
+    jQuery.post("<%=atributos_deficiente_pessoas_path%>"+"?deficiente=" + deficiente, function(data){
+      $("#atributos_deficiente").html(data);   
+    });
+  });
+});
+
+
+jQuery(function($) {$("#ocorrencia_tipo_ocorrencia").change(function() {
+    // make a POST call and replace the content
+    var tipo_ocorrencia = $('#ocorrencia_tipo_ocorrencia').val();
+    jQuery.post("<%=desdobramento_tipo_ocorrencia_ocorrencias_path%>"+"?tipo_ocorrencia=" + tipo_ocorrencia, function(data){
+      $("#desdobramento_tipo_ocorrencia").html(data);   
+    });
+  });
+});
+
+jQuery(function($) {$("#desdobramento_tipo").change(function() {
+    // make a POST call and replace the content
+    var tipo = $('#desdobramento_tipo').val();
+    jQuery.post("<%=atributos_tipo_desdobramentos_path%>"+"?tipo=" + tipo, function(data){
+      $("#atributos_tipo").html(data);   
+    });
+  });
+});
+

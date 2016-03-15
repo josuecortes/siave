@@ -68,14 +68,14 @@ class OcorrenciasController < ApplicationController
 
   def criar_pessoa
     @pessoa = Pessoa.new(pessoa_params)
-
+    
     respond_to do |format|
       if @pessoa.save
         format.js  {render "pessoa_salva"}
         format.json { render :show, status: :created, location: @pessoa }
       else
-        format.js {render "pessoa_nao_salva"}
-        format.json { render json: @pessoa.errors, status: :unprocessable_entity }
+        format.js {render "pessoa_nao_salva", status: :unprocessable_entit}
+        #format.json { render json: @pessoa.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -139,5 +139,12 @@ class OcorrenciasController < ApplicationController
     def colecoes
       @lista_influencias = [['Não','Não'], ['Álcool','Álcool'], ['Outras Drogas','Outras Drogas']]
       @pessoa = Pessoa.new
+      @lista_booleans = [['Nao',false], ['Sim',true]]
+      @lista_sexos = [['M','M'], ['F','F']]
+      @lista_documentos = [['RG','RG'], ['CPF','CPF'], ['CT','CT'], ['CN','CN']]
+      @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'], ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
+      @lista_escolaridades = [['Fundamental - Incompleto','Fundamental - Incompleto'], ['Fundamental - Completo','Fundamental - Completo'], ['Medio - Incompleto','Medio - Completo'], ['Superior - Incompleto','Superior - Incompleto'], ['Superior - Completo','Superior - Completo']]
+      @lista_contatos = [['Residencial','Residencial'], ['Celular','Celular'], ['Trabalho','Trabalho']]
+      @lista_racas = [['Branca','Branca'], ['Preta','Preta'], ['Parda','Parda'], ['Indígena','Indígena'], ['Amarela','Amarela']]
     end
 end

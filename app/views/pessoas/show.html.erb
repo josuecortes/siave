@@ -36,25 +36,34 @@
   <%= simnao(@pessoa.documento) %>
 </p>
 
-<p>
-  <strong>Tipo documento:</strong>
-  <%= @pessoa.tipo_documento %>
-</p>
 
-<p>
-  <strong>Numero documento:</strong>
-  <%= @pessoa.numero_documento %>
-</p>
+<% if @pessoa.documento == true %>
+
+  <p>
+    <strong>Tipo documento:</strong>
+    <%= @pessoa.tipo_documento %>
+  </p>
+
+  <p>
+    <strong>Numero documento:</strong>
+    <%= @pessoa.numero_documento %>
+  </p>
+
+<% end %>
 
 <p>
   <strong>Deficiente:</strong>
   <%= simnao(@pessoa.deficiente) %>
 </p>
 
-<p>
-  <strong>Tipo deficiencia:</strong>
-  <%= @pessoa.tipo_deficiencia %>
-</p>
+<% if @pessoa.deficiente == true %>
+
+  <p>
+    <strong>Tipo deficiencia:</strong>
+    <%= @pessoa.tipo_deficiencia %>
+  </p>
+
+<% end %>
 
 <p>
   <strong>Nome responsavel:</strong>
