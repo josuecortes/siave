@@ -40,6 +40,7 @@ end
 ######################################
 exemplo de migration
 rails g migration AddPessoaAndAtivoAndMudarSenhaToUser pessoa:references ativo:boolean mudar_senha:boolean
+<<<<<<< HEAD
 
 
 
@@ -83,4 +84,3 @@ jQuery(function($) {$("#desdobramento_tipo").change(function() {
     });
   });
 });
-

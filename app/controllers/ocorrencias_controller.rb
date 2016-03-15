@@ -10,7 +10,7 @@ class OcorrenciasController < ApplicationController
     #@ocorrencias = Ocorrencia.all
     @q = Ocorrencia.ransack(params[:q])
     @ocorrencias = @q.result.accessible_by(current_ability).order('created_at DESC').paginate(:page => params[:page], :per_page => @@per_page)
-        
+
   end
 
   # GET /ocorrencias/1
@@ -113,28 +113,28 @@ class OcorrenciasController < ApplicationController
   end
 
   #desdobramento agressor
-  
+
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ocorrencia
-      @ocorrencia = Ocorrencia.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ocorrencia
+    @ocorrencia = Ocorrencia.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ocorrencia_params
-      params.require(:ocorrencia).permit(:numero_protocolo, :sob_influencia, :encaminhamento_id,
-                     :tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :agressor_id, 
-                     :desdobramento_tipo_ocorrencia_id, :tipo_desdobramento_ocorrencia_id,
-                     :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ocorrencia_params
+    params.require(:ocorrencia).permit(:numero_protocolo, :sob_influencia, :encaminhamento_id,
+                                       :tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :agressor_id,
+                                       :desdobramento_tipo_ocorrencia_id, :tipo_desdobramento_ocorrencia_id,
+                                       :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id )
+  end
 
-    def pessoa_params
-      params.require(:pessoa).permit(:nome, :data_nascimento, :sexo, :raca, :escolaridade, 
-                                      :documento, :tipo_documento, :numero_documento, :deficiente,
-                                      :tipo_deficiencia, :nome_responsavel, :cep, :numero, :complemento,
-                                      contatos_attributes: [:id, :tipo, :numero, :_destroy])
-    end
+  def pessoa_params
+    params.require(:pessoa).permit(:nome, :data_nascimento, :sexo, :raca, :escolaridade,
+                                   :documento, :tipo_documento, :numero_documento, :deficiente,
+                                   :tipo_deficiencia, :nome_responsavel, :cep, :numero, :complemento,
+                                   contatos_attributes: [:id, :tipo, :numero, :_destroy])
+  end
 
     def colecoes
       @lista_influencias = [['Não','Não'], ['Álcool','Álcool'], ['Outras Drogas','Outras Drogas']]

@@ -24,7 +24,7 @@
           jQuery(function($) {$("#ocorrencia_desdobramento_tipo_ocorrencia_id").change(function() {
             // make a POST call and replace the content
             var desdobramento_tipo_ocorrencia = $('#ocorrencia_desdobramento_tipo_ocorrencia_id').val();
-            jQuery.post("/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
+            jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
               $("#tipo_desdobramento_ocorrencia").html(data);   
             });
           });
