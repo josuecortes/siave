@@ -69,7 +69,7 @@ class DesdobramentosController < ApplicationController
   def atributos_tipo
     if params[:tipo] == 'Ocorrencia'
       render :partial => "atributos_ocorrencias"
-    elsif params[:tipo] == 'Agressoes'
+    elsif params[:tipo] == 'Agressor'
       render :partial => "atributos_agressoes"
     else
       render :nothing => true
@@ -88,6 +88,6 @@ class DesdobramentosController < ApplicationController
     end
 
     def colecoes
-      @lista_tipos = [['Ocorrencia','Ocorrencia'], ['Agressoes','Agressoes']]
+      @lista_tipos = [['Ocorrencia','Ocorrencia'], ['Agressor','Agressor']]
     end
 end

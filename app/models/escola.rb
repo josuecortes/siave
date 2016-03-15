@@ -4,7 +4,7 @@ class Escola < ActiveRecord::Base
 
 	validates_presence_of :codigo, :nome, :cep
 
-	validates_uniqueness_of :codigo
+	validates_uniqueness_of :codigo, :nome, :scope => [:codigo]
 
 	
 	

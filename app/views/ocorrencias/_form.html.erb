@@ -5,7 +5,8 @@
 </div>
 
 <div class="form-inputs">
-  <%= f.input :numero_protocolo %>
+
+  <%= f.input :data_ocorrencia %>
 
   <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia.descricao if @ocorrencia.tipo_ocorrencia)} %>  
 
@@ -46,7 +47,7 @@
           <%= f.input :agredido_id, :as => :hidden, :input_html => { :id => "agredido_id"} %>   
         </div>
         <div class="col-md-6">
-          <%= f.input :agredido_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
+          <%= f.input :agressor_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
 
           <%= f.input :agressor_id, :as => :hidden, :input_html => { :id => "agressor_id"} %>
         </div>
