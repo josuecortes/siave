@@ -34,3 +34,5 @@ gem "nested_form"
 gem 'jquery-ui-rails'
 
 gem 'rails-jquery-autocomplete'
+
+gem 'gon'
