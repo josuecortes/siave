@@ -42,3 +42,4 @@ exemplo de migration
 rails g migration AddPessoaAndAtivoAndMudarSenhaToUser pessoa:references ativo:boolean mudar_senha:boolean
 funfou poar!
 funfou poar!
+funfou poar!
