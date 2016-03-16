@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314135252) do
+ActiveRecord::Schema.define(version: 20160315165842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160314135252) do
     t.integer  "tipo_desdobramento_ocorrencia_id"
     t.integer  "desdobramento_tipo_agressor_id"
     t.integer  "tipo_desdobramento_agressor_id"
+    t.date     "data_ocorrencia"
   end
 
   add_index "ocorrencias", ["encaminhamento_id"], name: "index_ocorrencias_on_encaminhamento_id", using: :btree

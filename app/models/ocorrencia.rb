@@ -1,7 +1,7 @@
 class Ocorrencia < ActiveRecord::Base
 	self.table_name = 'ocorrencias'
 
-	attr_accessor :agredido_nome
+	attr_accessor :agredido_nome, :agressor_nome
 
 	belongs_to :tipo_ocorrencia
 	belongs_to :tipo_agressor
@@ -15,6 +15,19 @@ class Ocorrencia < ActiveRecord::Base
 	belongs_to :agressor, :inverse_of => :agressoes, :class_name => "Pessoa"
 	#has_and_belongs_to_many :agressores, :inverse_of => :agressoes, :class_name => "Pessoa"
 
+	validates_presence_of :data_ocorrencia, :sob_influencia, :encaminhamento_id,
+												:tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id
+
+	validates_presence_of :agredido_nome, :if => Proc.new{|p| p.agredido_id.blank?}, :message => "Voce deve selecionar um nome"
+
+	validates_uniqueness_of :numero_protocolo
+
+	after_create :gerar_numero_protocolo
+
+	def gerar_numero_protocolo
+		self.numero_protocolo = "#{DateTime.now.year}/#{self.id}"
+		self.save
+	end
 	
 
 

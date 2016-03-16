@@ -123,7 +123,7 @@ class OcorrenciasController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ocorrencia_params
-    params.require(:ocorrencia).permit(:numero_protocolo, :sob_influencia, :encaminhamento_id,
+    params.require(:ocorrencia).permit(:numero_protocolo, :data_ocorrencia, :sob_influencia, :encaminhamento_id,
                                        :tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :agressor_id,
                                        :desdobramento_tipo_ocorrencia_id, :tipo_desdobramento_ocorrencia_id,
                                        :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id )
