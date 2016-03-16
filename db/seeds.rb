@@ -10,9 +10,9 @@
 
 u = User.new
 u.name="ADMINISTRADOR DO SISTEMA"
-u.email="administrador@siave.com"
-u.password="123123123"
-u.password_confirmation="123123123"
+u.email="siave@seed.ap.gov.br"
+u.password="@#siave$%"
+u.password_confirmation="@#siave$%"
 u.mudar_senha = false
 u.ativo = true
 
