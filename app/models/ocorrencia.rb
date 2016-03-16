@@ -10,13 +10,17 @@ class Ocorrencia < ActiveRecord::Base
 	belongs_to :tipo_desdobramento_ocorrencia, :inverse_of => :tipo_desdobramento_ocorrencias, :class_name => "TipoDesdobramento"
 	belongs_to :tipo_desdobramento_agressor, :inverse_of => :tipo_desdobramento_agressores, :class_name => "TipoDesdobramento"
 	belongs_to :encaminhamento
+	belongs_to :user
+	belongs_to :escola
 
 	belongs_to :agredido, :inverse_of => :ocorrencias, :class_name => "Pessoa"
 	belongs_to :agressor, :inverse_of => :agressoes, :class_name => "Pessoa"
 	#has_and_belongs_to_many :agressores, :inverse_of => :agressoes, :class_name => "Pessoa"
 
 	validates_presence_of :data_ocorrencia, :sob_influencia, :encaminhamento_id,
-												:tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id
+												:tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :user_id, :local_ocorrencia
+
+	#validates_presence_of :escola_id,	:message => "Você precisa estar atrelado a uma Escola"
 
 	validates_presence_of :agredido_nome, :if => Proc.new{|p| p.agredido_id.blank?}, :message => "Voce deve selecionar um nome"
 

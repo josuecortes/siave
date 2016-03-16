@@ -1,0 +1,3 @@
+<%=simple_fields_for :ocorrencia do |f|%>
+<%= f.input :tipo_desdobramento_agressor_id, collection: @tipo_desdobramentos_agressor, :label=>"Tipo de Desdobramento do Agressor", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_agressor_id"}%>  
+<%end%>

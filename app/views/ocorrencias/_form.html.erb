@@ -1,74 +1,110 @@
 <%= simple_form_for(@ocorrencia) do |f| %>
-<%= f.error_notification %>
+  <%= f.error_notification %>
 
-<div id="notice">
-</div>
+  <div id="notice">
 
-<div class="form-inputs">
-
-  <%= f.input :data_ocorrencia %>
-
-  <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia.descricao if @ocorrencia.tipo_ocorrencia)} %>  
-
-  <div id="desdobramento_tipo_ocorrencia">
-    <%if !@ocorrencia.new_record?%>
-
-      <%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos, :label=>"Desdobramento do Tipo de Ocorrência", include_blank: true %>  
-
-      <div id="tipo_desdobramento_ocorrencia">
-        <%= f.input :tipo_desdobramento_ocorrencia_id, collection: @tipo_desdobramentos_ocorrencia, :label=>"Desdobramento do Desdobramento do Tipo de Ocorrência", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_ocorrencia_id"}%>  
-      </div>
-
-
-      <script type="text/javascript">
-
-          jQuery(function($) {$("#ocorrencia_desdobramento_tipo_ocorrencia_id").change(function() {
-            // make a POST call and replace the content
-            var desdobramento_tipo_ocorrencia = $('#ocorrencia_desdobramento_tipo_ocorrencia_id').val();
-            jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
-              $("#tipo_desdobramento_ocorrencia").html(data);   
-            });
-          });
-        });
-
-      </script>
-
-    <% end %>
   </div>
 
+  <div class="form-inputs">
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
+    <%= f.input :local_ocorrencia, collection: @lista_locais, :label=>"Local da Ocorrência", include_blank: true %>  
 
-        <div class="col-md-6">
-          <%= f.input :agredido_nome, :label=>"Pessoa Agredida", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agredido_id" ,:input_html=>{:value=>(@ocorrencia.agredido.nome if @ocorrencia.agredido)}%>
+    <%= f.input :data_ocorrencia, :label=>"Data da Ocorrência" %>
 
-          <%= f.input :agredido_id, :as => :hidden, :input_html => { :id => "agredido_id"} %>   
+    <%= f.input :horario_aproximado, :label=>"Horario Aproximado da Ocorrência" %>
+
+    <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia.descricao if @ocorrencia.tipo_ocorrencia)} %>  
+
+    <div id="desdobramento_tipo_ocorrencia">
+      <%if !@ocorrencia.new_record?%>
+
+        <%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos, :label=>"Desdobramento da Ocorrência", include_blank: true %>  
+
+        <div id="tipo_desdobramento_ocorrencia">
+          <%= f.input :tipo_desdobramento_ocorrencia_id, collection: @tipo_desdobramentos_ocorrencia, :label=>"Tipo de Desdobramento da Ocorrência", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_ocorrencia_id"}%>  
         </div>
-        <div class="col-md-6">
-          <%= f.input :agressor_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
 
-          <%= f.input :agressor_id, :as => :hidden, :input_html => { :id => "agressor_id"} %>
+
+        <script type="text/javascript">
+
+            jQuery(function($) {$("#ocorrencia_desdobramento_tipo_ocorrencia_id").change(function() {
+              // make a POST call and replace the content
+              var desdobramento_tipo_ocorrencia = $('#ocorrencia_desdobramento_tipo_ocorrencia_id').val();
+              jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
+                $("#tipo_desdobramento_ocorrencia").html(data);   
+              });
+            });
+          });
+
+        </script>
+
+      <% end %>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-6">
+            <%= f.input :agredido_nome, :label=>"Pessoa Agredida", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agredido_id" ,:input_html=>{:value=>(@ocorrencia.agredido.nome if @ocorrencia.agredido)}%>
+
+            <%= f.input :agredido_id, :as => :hidden, :input_html => { :id => "agredido_id"} %>   
+          </div>
+          <div class="col-md-6">
+            <%= f.input :agressor_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
+
+            <%= f.input :agressor_id, :as => :hidden, :input_html => { :id => "agressor_id"} %>
+          </div>
         </div>
+
+        <%= link_to link_icone2('nova', 'Cadastrar Pessoa'), '#myModal', :class=> 'btn btn-success', :title=>"Nova Pessoa", :'data-toggle'=>"modal", :'data-target'=>"#myModal"  %>  
+
+
       </div>
-
-      <%= link_to link_icone2('nova', 'Cadastrar Pessoa'), '#myModal', :class=> 'btn btn-success', :title=>"Nova Pessoa", :'data-toggle'=>"modal", :'data-target'=>"#myModal"  %>  
-
 
     </div>
 
+    <br/>
+
+    <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_agressor", :value=>(@ocorrencia.tipo_agressor.descricao if @ocorrencia.tipo_agressor)} %>  
+
+    <div id="desdobramento_tipo_agressor">
+      <%if !@ocorrencia.new_record?%>
+
+        <%= f.input :desdobramento_tipo_agressor_id, collection: @desdobramentos, :label=>"Desdobramento do Agressor", include_blank: true %>  
+
+        <div id="tipo_desdobramento_agressor">
+          <%= f.input :tipo_desdobramento_agressor_id, collection: @tipo_desdobramentos_agressor, :label=>"Tipo de Desdobramento do Agressor", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_agressor_id"}%>  
+        </div>
+
+
+        <script type="text/javascript">
+
+            jQuery(function($) {$("#ocorrencia_desdobramento_tipo_agressor_id").change(function() {
+              // make a POST call and replace the content
+              var desdobramento_tipo_agressor = $('#ocorrencia_desdobramento_tipo_agressor_id').val();
+              jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_agressor/?desdobramento_tipo_agressor=" + desdobramento_tipo_agressor, function(data){
+                $("#tipo_desdobramento_agressor").html(data);   
+              });
+            });
+          });
+
+        </script>
+
+      <% end %>
+    </div>
+
+    <%= f.input :sob_influencia, collection: @lista_influencias, as: :select, :include_blank => false %>
+
+    <%= f.association :encaminhamento, collection: Encaminhamento.order([:descricao]), :label=>"Encaminhamento", label_method: :descricao, value_method: :id, include_blank: true %>
+
   </div>
 
-  <br/>
-
-  <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: false %>
-
-  <%= f.input :sob_influencia, collection: @lista_influencias, as: :select, :include_blank => false %>
-
-  <%= f.association :encaminhamento, collection: Encaminhamento.order([:descricao]), :label=>"Encaminhamento", label_method: :descricao, value_method: :id, include_blank: false %>
-
-  </div>
+  <% if @ocorrencia.user_id.blank? %>
+    <%= f.input :user_id, as: :hidden, :input_html=>{:value=>current_user.id} %>
+    <%= f.input :escola_id, as: :hidden, :input_html=>{:value=>current_user.escola_id} %>
+  <% end %>
 
   <div class="form-actions">
     <%= f.button :submit, :class=>'btn btn-primary' %>

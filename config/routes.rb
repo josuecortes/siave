@@ -24,6 +24,10 @@ Rails.application.routes.draw do
 
     post :tipo_desdobramento_ocorrencia, :on => :collection
 
+    post :desdobramento_tipo_agressor, :on => :collection
+
+    post :tipo_desdobramento_agressor, :on => :collection
+
   
   end
 

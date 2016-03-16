@@ -26,6 +26,15 @@ jQuery(function($) {$("#ocorrencia_tipo_ocorrencia").change(function() {
   });
 });
 
+jQuery(function($) {$("#ocorrencia_tipo_agressor").change(function() {
+    // make a POST call and replace the content
+    var tipo_agressor = $('#ocorrencia_tipo_agressor').val();
+    jQuery.post(gon.suburi+"/ocorrencias/desdobramento_tipo_agressor/?tipo_agressor=" + tipo_agressor, function(data){
+      $("#desdobramento_tipo_agressor").html(data);   
+    });
+  });
+});
+
 jQuery(function($) {$("#desdobramento_tipo").change(function() {
     // make a POST call and replace the content
     var tipo = $('#desdobramento_tipo').val();

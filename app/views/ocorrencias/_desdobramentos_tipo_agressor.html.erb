@@ -1,0 +1,21 @@
+<%=simple_fields_for :ocorrencia do |f|%>
+<%= f.input :desdobramento_tipo_agressor_id, collection: @desdobramentos, :label=>"Desdobramento do Agressor", include_blank: true %>  
+<%end%>
+
+<div id="tipo_desdobramento_agressor">
+
+</div>
+
+
+<script type="text/javascript">
+
+jQuery(function($) {$("#ocorrencia_desdobramento_tipo_agressor_id").change(function() {
+    // make a POST call and replace the content
+    var desdobramento_tipo_agressor = $('#ocorrencia_desdobramento_tipo_agressor_id').val();
+    jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_agressor/?desdobramento_tipo_agressor=" + desdobramento_tipo_agressor, function(data){
+      $("#tipo_desdobramento_agressor").html(data);   
+    });
+  });
+});
+
+</script>

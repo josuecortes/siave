@@ -109,11 +109,28 @@ class OcorrenciasController < ApplicationController
     else
       render :nothing => true
     end
-
   end
 
   #desdobramento agressor
+  def desdobramento_tipo_agressor
+    if !params[:tipo_agressor].blank?
+      @tipo_agressor = TipoAgressor.find(params[:tipo_agressor])
+      @desdobramentos = @tipo_agressor.desdobramentos.collect{|t| [t.descricao, t.id]}
+      render :partial => "desdobramentos_tipo_agressor"
+    else
+      render :nothing => true
+    end
+  end
 
+  def tipo_desdobramento_agressor
+    if !params[:desdobramento_tipo_agressor].blank?
+      @desdobramento = Desdobramento.find(params[:desdobramento_tipo_agressor])
+      @tipo_desdobramentos_agressor = @desdobramento.tipo_desdobramentos.collect{|t| [t.descricao, t.id]}
+      render :partial => "tipo_desdobramento_agressor"
+    else
+      render :nothing => true
+    end
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -123,10 +140,12 @@ class OcorrenciasController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ocorrencia_params
-    params.require(:ocorrencia).permit(:numero_protocolo, :data_ocorrencia, :sob_influencia, :encaminhamento_id,
-                                       :tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :agressor_id,
+    params.require(:ocorrencia).permit(:numero_protocolo, :local_ocorrencia, :data_ocorrencia, :horario_aproximado,
+                                       :sob_influencia, :encaminhamento_id, :tipo_ocorrencia_id, 
+                                       :tipo_agressor_id, :agredido_id, :agressor_id,
                                        :desdobramento_tipo_ocorrencia_id, :tipo_desdobramento_ocorrencia_id,
-                                       :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id )
+                                       :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id,
+                                       :user_id, :escola_id )
   end
 
   def pessoa_params
@@ -137,14 +156,15 @@ class OcorrenciasController < ApplicationController
   end
 
     def colecoes
-      @lista_influencias = [['Não','Não'], ['Álcool','Álcool'], ['Outras Drogas','Outras Drogas']]
+      @lista_influencias = [['NAO','NAO'], ['ALCOOL','ALCOOL'], ['OUTRAS DROGAS','OUTRAS DROGAS']]
       @pessoa = Pessoa.new
-      @lista_booleans = [['Nao',false], ['Sim',true]]
+      @lista_booleans = [['NAO',false], ['SIM',true]]
       @lista_sexos = [['M','M'], ['F','F']]
       @lista_documentos = [['RG','RG'], ['CPF','CPF'], ['CT','CT'], ['CN','CN']]
       @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'], ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
-      @lista_escolaridades = [['Fundamental - Incompleto','Fundamental - Incompleto'], ['Fundamental - Completo','Fundamental - Completo'], ['Medio - Incompleto','Medio - Completo'], ['Superior - Incompleto','Superior - Incompleto'], ['Superior - Completo','Superior - Completo']]
-      @lista_contatos = [['Residencial','Residencial'], ['Celular','Celular'], ['Trabalho','Trabalho']]
-      @lista_racas = [['Branca','Branca'], ['Preta','Preta'], ['Parda','Parda'], ['Indígena','Indígena'], ['Amarela','Amarela']]
+      @lista_escolaridades = [['FUNDAMENTAL - INCOMPLETO','FUNDAMENTAL - INCOMPLETO'], ['FUNDAMENTAL - COMPLETO','FUNDAMENTAL - COMPLETO'], ['MEDIO - INCOMPLETO','MEDIO - COMPLETO'], ['SUPERIOR - INCOMPLETO','SUPERIOR - INCOMPLETO'], ['SUPERIOR - COMPLETO','SUPERIOR - COMPLETO']]
+      @lista_contatos = [['RESIDENCIAL','RESIDENCIAL'], ['CELULAR','CELULAR'], ['TRABALHO','TRABALHO']]
+      @lista_racas = [['BRANCA','BRANCA'], ['PRETA','PRETA'], ['PARDA','PARDA'], ['INDIGENA','INDIGENA'], ['AMARELA','AMARELA']]
+      @lista_locais = [['SALA DE AULA','SALA DE AULA'], ['QUADRA DE ESPORTE','QUADRA DE ESPORTE'], ['BIBLIOTECA','BIBLIOTECA'], ['CORREDOR DA ESCOLA','CORREDOR DA ESCOLA'], ['VIA PUBLICA','VIA PUBLICA']]
     end
 end

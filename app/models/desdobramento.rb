@@ -18,7 +18,7 @@ class Desdobramento < ActiveRecord::Base
 	validates_presence_of :tipo_agressor_id, :if => :verficiar_tipo_agressor
 
 	def verficiar_tipo_ocorrencia
-		if self.tipo == "Ocorrencia"
+		if self.tipo == "TIPO DE OCORRENCIA"
 			self.tipo_agressor_id = nil
 			return true
 		else
@@ -27,7 +27,7 @@ class Desdobramento < ActiveRecord::Base
 	end
 
 	def verficiar_tipo_agressor
-		if self.tipo == "Agressor"
+		if self.tipo == "TIPO DE AGRESSOR"
 			self.tipo_ocorrencia_id = nil
 			return true
 		else

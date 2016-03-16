@@ -12,8 +12,18 @@
 </p>
 
 <p>
+  <strong>Local Ocorrência:</strong>
+  <%= @ocorrencia.local_ocorrencia %>
+</p>
+
+<p>
   <strong>Data Ocorrência:</strong>
   <%= data_br(@ocorrencia.data_ocorrencia) %>
+</p>
+
+<p>
+  <strong>Horario Aproximado da Ocorrência:</strong>
+  <%= @ocorrencia.horario_aproximado %>
 </p>
 
 <p>
@@ -55,6 +65,17 @@
   <strong>Encaminhamento:</strong>
   <%= detalhes2(@ocorrencia.encaminhamento, :descricao) %>
 </p>
+
+<p>
+  <strong>Responsavel:</strong>
+  <%= detalhes2(@ocorrencia.user, :name) %>
+</p>
+
+<p>
+  <strong>Escola:</strong>
+  <%= detalhes2(@ocorrencia.escola, :nome) %>
+</p>
+
 
 <%= link_to link_icone('voltar'), ocorrencias_path, :class=>'btn btn-default', :title=>"Voltar" %> 
 <%= link_to link_icone('editar'), edit_ocorrencia_path(@ocorrencia), :class=>"btn btn-primary", :title=>"Editar" %> 

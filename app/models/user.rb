@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
 
+  has_many :ocorrencias
+
   belongs_to :escola
 
 	validates_presence_of :name, :email
