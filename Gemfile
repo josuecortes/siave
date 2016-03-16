@@ -36,3 +36,5 @@ gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'
 
 gem 'gon'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
