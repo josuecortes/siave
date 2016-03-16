@@ -1,7 +1,12 @@
-<% content_for :titulo do %>
+    <% content_for :titulo do %>
   <h4>
   	<strong>
   		Home <i class="glyphicon glyphicon-home"></i>
   	</strong>
   </h4>
 <% end %>
+
+<%@ocorrencias.each do |desdobramento,ocorrencias|%>
+<legend><%=desdobramento.descricao%></legend>
+<strong>Número de ocorrências:</strong> <%=ocorrencias.count%>
+<%end%>

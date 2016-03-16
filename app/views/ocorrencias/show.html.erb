@@ -52,7 +52,7 @@
 </p>
 
 <p>
-  <strong>Desdobramento do Desdobramento da Ocorrencia:</strong>
+  <strong>Tipo do Desdobramento da Ocorrencia:</strong>
   <%= detalhes2(@ocorrencia.tipo_desdobramento_ocorrencia, :descricao) %>
 </p>
 
@@ -60,6 +60,17 @@
   <strong>Tipo de Agressor:</strong>
   <%= detalhes2(@ocorrencia.tipo_agressor, :descricao) %>
 </p>
+
+<p>
+  <strong>Desdobramento do Tipo de Agressor:</strong>
+  <%= detalhes2(@ocorrencia.desdobramento_tipo_agressor, :descricao) %>
+</p>
+
+<p>
+  <strong>Tipo do Desdobramento do Agressor:</strong>
+  <%= detalhes2(@ocorrencia.tipo_desdobramento_agressor, :descricao) %>
+</p>
+
 
 <p>
   <strong>Encaminhamento:</strong>

@@ -13,15 +13,15 @@
 
     <%= f.input :horario_aproximado, :label=>"Horario Aproximado da Ocorrência" %>
 
-    <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia.descricao if @ocorrencia.tipo_ocorrencia)} %>  
+    <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia if @ocorrencia.tipo_ocorrencia)} %>  
 
     <div id="desdobramento_tipo_ocorrencia">
       <%if !@ocorrencia.new_record?%>
 
-        <%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos, :label=>"Desdobramento da Ocorrência", include_blank: true %>  
+        <%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos_tipo_ocorrencia, :label=>"Desdobramento da Ocorrência", include_blank: true if (!@ocorrencia.desdobramento_tipo_ocorrencia.nil? or (@ocorrencia.tipo_ocorrencia and @ocorrencia.tipo_ocorrencia.desdobramentos.any?))%>
 
         <div id="tipo_desdobramento_ocorrencia">
-          <%= f.input :tipo_desdobramento_ocorrencia_id, collection: @tipo_desdobramentos_ocorrencia, :label=>"Tipo de Desdobramento da Ocorrência", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_ocorrencia_id"}%>  
+          <%= f.input :tipo_desdobramento_ocorrencia_id, collection: @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t|[t.descricao,t.id]}, :label=>"Tipo de Desdobramento da Ocorrência", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_ocorrencia_id"}   if (!@ocorrencia.tipo_desdobramento_ocorrencia.nil? or (@ocorrencia.desdobramento_tipo_ocorrencia and @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.any?))%>  
         </div>
 
 
@@ -67,16 +67,16 @@
 
     <br/>
 
-    <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_agressor", :value=>(@ocorrencia.tipo_agressor.descricao if @ocorrencia.tipo_agressor)} %>  
+    <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_agressor", :value=>(@ocorrencia.tipo_agressor if @ocorrencia.tipo_agressor)} %>  
 
     <div id="desdobramento_tipo_agressor">
       <%if !@ocorrencia.new_record?%>
 
-        <%= f.input :desdobramento_tipo_agressor_id, collection: @desdobramentos, :label=>"Desdobramento do Agressor", include_blank: true %>  
+        <%= f.input :desdobramento_tipo_agressor_id, collection: @desdobramentos_tipo_agressor, :label=>"Desdobramento do Agressor", include_blank: true if (!@ocorrencia.desdobramento_tipo_agressor.nil? or (@ocorrencia.tipo_agressor and @ocorrencia.tipo_agressor.desdobramentos.any?))%>  
 
         <div id="tipo_desdobramento_agressor">
-          <%= f.input :tipo_desdobramento_agressor_id, collection: @tipo_desdobramentos_agressor, :label=>"Tipo de Desdobramento do Agressor", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_agressor_id"}%>  
-        </div>
+          <%= f.input :tipo_desdobramento_agressor_id, collection: @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.collect{|t|[t.descricao,t.id]}, :label=>"Tipo de Desdobramento do Agressor", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_agressor_id"} if (!@ocorrencia.tipo_desdobramento_agressor.nil? or (@ocorrencia.desdobramento_tipo_agressor and @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.any?))%>  
+        </div>  
 
 
         <script type="text/javascript">

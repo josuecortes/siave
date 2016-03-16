@@ -83,3 +83,6 @@ a4 = TipoAgressor.find_or_create_by(:descricao=>"PROFESSOR")
 a5 = TipoAgressor.find_or_create_by(:descricao=>"FUNCIONARIO DA ESCOLA")
 a6 = TipoAgressor.find_or_create_by(:descricao=>"LADRAO")
 a7 = TipoAgressor.find_or_create_by(:descricao=>"ASSALTANTE")
+
+
+load "#{Rails.root}/db/escolas.rb"

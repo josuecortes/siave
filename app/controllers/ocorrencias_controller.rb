@@ -32,8 +32,11 @@ class OcorrenciasController < ApplicationController
   # GET /ocorrencias/1/edit
   def edit
     @tipo_ocorrencia = @ocorrencia.tipo_ocorrencia
-    @desdobramentos = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_ocorrencia
+    @desdobramentos_tipo_ocorrencia = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_ocorrencia
     @tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_ocorrencia
+    @tipo_agressor = @ocorrencia.tipo_agressor
+    @desdobramentos_tipo_agressor = @tipo_agressor.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_agressor
+    @tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_agressor
   end
 
   # POST /ocorrencias

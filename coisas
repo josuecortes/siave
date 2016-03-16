@@ -84,3 +84,19 @@ jQuery(function($) {$("#desdobramento_tipo").change(function() {
     });
   });
 });
+
+########### Código para gerar código ruby a partir de dados em outro sistema #############
+
+################### Executado no sistema onde estão os dados #########################
+arquivo = File.open("../escolas.rb",'w')
+Escola.all.each do |e|
+arquivo.puts "Escola.create(:nome=>'#{e.nome}',:email=>'#{e.email}',:contato=>'#{e.telefone}',:codigo=>'#{e.codigo}')"
+end
+arquivo.close
+
+####################### Executado no sistema em que se quer criar os objetos  ########################
+
+load "db/escolas.rb"
+
+#exemplo
+load "/caminho/do/arquivo.rb"

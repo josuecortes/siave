@@ -1,5 +1,6 @@
 class EscolasController < ApplicationController
   before_action :set_escola, only: [:show, :edit, :update, :destroy]
+  before_filter :colecoes
   load_and_authorize_resource :class=>"Escola", except: :create
 
   # GET /escolas
@@ -73,6 +74,10 @@ class EscolasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def escola_params
-      params.require(:escola).permit(:codigo, :nome, :cep, :numero, :email, :contato)
+      params.require(:escola).permit(:codigo, :nome, :cep, :numero, :email, :contato,:municipio)
+    end
+
+    def colecoes
+      @municipios = ["AMAPA", "CALCOENE", "FERREIRA GOMES", "MAZAGAO", "OIAPOQUE", "PORTO GRANDE", "SANTANA", "TARTARUGALZINHO", "PRACUUBA", "ITAUBAL", "CUTIAS", "PEDRA BRANCA DO AMAPARI", "MACAPA", "LARANJAL DO JARI", "VITORIA DO JARI", "SERRA DO NAVIO"]
     end
 end
