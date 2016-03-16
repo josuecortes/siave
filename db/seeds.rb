@@ -22,7 +22,7 @@ else
 	puts "erro ao criar Administrador"
 end
 
-u = User.find_by(:name=>"ADMINISTRADOR DO SISTEMA", :email=>"administrador@siave.com")
+u = User.find_by(:name=>"ADMINISTRADOR DO SISTEMA", :email=>"siave@seed.ap.gov.br")
 
 a = Role.find_or_create_by(:nome=>"ADMINISTRADOR")
 
