@@ -74,7 +74,7 @@ class OcorrenciasController < ApplicationController
         format.js  {render "pessoa_salva"}
         format.json { render :show, status: :created, location: @pessoa }
       else
-        format.js {render "pessoa_nao_salva", status: :unprocessable_entit}
+        format.js {render "pessoa_nao_salva"}
         #format.json { render json: @pessoa.errors, status: :unprocessable_entity }
       end
     end

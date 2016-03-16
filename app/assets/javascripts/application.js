@@ -17,6 +17,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery_nested_form
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require_tree .
 
 $(".alert").addClass("in").fadeOut(4500);
