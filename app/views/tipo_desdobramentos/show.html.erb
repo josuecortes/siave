@@ -7,13 +7,13 @@
 <% end %>
 
 <p>
-  <strong>Descricao:</strong>
-  <%= @tipo_desdobramento.descricao %>
+  <strong>Tipo:</strong>
+  <%= detalhes2(@tipo_desdobramento.desdobramento, :descricao_completa) %>
 </p>
 
 <p>
-  <strong>Tipo agressor:</strong>
-  <%= detalhes2(@tipo_desdobramento.desdobramento, :descricao) %>
+  <strong>Descricao:</strong>
+  <%= @tipo_desdobramento.descricao %>
 </p>
 
 <%= link_to link_icone('voltar'), tipo_desdobramentos_path, :class=>'btn btn-default', :title=>"Voltar" %> 

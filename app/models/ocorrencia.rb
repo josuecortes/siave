@@ -17,7 +17,7 @@ class Ocorrencia < ActiveRecord::Base
 	belongs_to :agressor, :inverse_of => :agressoes, :class_name => "Pessoa"
 	#has_and_belongs_to_many :agressores, :inverse_of => :agressoes, :class_name => "Pessoa"
 
-	validates_presence_of :data_ocorrencia, :sob_influencia, :encaminhamento_id,
+	validates_presence_of :data_ocorrencia, :sob_influencia, :encaminhamento_id, :desdobramento_tipo_ocorrencia_id,
 												:tipo_ocorrencia_id, :tipo_agressor_id, :agredido_id, :user_id, :local_ocorrencia
 
 	#validates_presence_of :escola_id,	:message => "Você precisa estar atrelado a uma Escola"
@@ -33,6 +33,12 @@ class Ocorrencia < ActiveRecord::Base
 		self.save
 	end
 	
+	before_save :maiusculas_sem_acentos
 
+	def maiusculas_sem_acentos
+
+		  		
+		
+	end
 
 end

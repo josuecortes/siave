@@ -23,8 +23,8 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Descrição</th>
       <th>Tipo</th>
+      <th>Descrição</th>
       <th>Ações</th>
     </tr>
   </thead>
@@ -32,14 +32,14 @@
   <tbody>
     <% @desdobramentos.each do |desdobramento| %>
       <tr>
-        <td><%= desdobramento.descricao %></td>
         <td>
           <% if desdobramento.tipo_agressor.blank? %>
-            <%= detalhes2(desdobramento.tipo_ocorrencia, :descricao) %>
+            OCORRENCIA -> <%= detalhes2(desdobramento.tipo_ocorrencia, :descricao) %>
           <% else %>
-            <%= detalhes2(desdobramento.tipo_agressor, :descricao) %>
+            AGRESSOR -> <%= detalhes2(desdobramento.tipo_agressor, :descricao) %>
           <% end %>
         </td>
+        <td><%= desdobramento.descricao %></td>
         <td>
           <%= link_to link_icone('detalhes'),
                     desdobramento_path(desdobramento), :class => 'btn btn-default', :title=>"Detalhes" %>

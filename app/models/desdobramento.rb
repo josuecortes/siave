@@ -35,4 +35,20 @@ class Desdobramento < ActiveRecord::Base
 		end
 	end
 
+	def descricao_completa
+		if self.tipo == "TIPO DE OCORRENCIA"
+			return "OCORRENCIA -> #{self.tipo_ocorrencia.descricao} -> #{self.descricao}"
+		else
+			return "AGRESSOR -> #{self.tipo_agressor.descricao} -> #{self.descricao}"
+		end
+	end
+
+	before_save :maiusculas_sem_acentos
+
+	def maiusculas_sem_acentos
+
+		self.descricao = ActiveSupport::Inflector.transliterate(self.descricao).upcase if !self.descricao.blank?  
+
+	end
+
 end

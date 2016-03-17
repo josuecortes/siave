@@ -23,6 +23,13 @@ class User < ActiveRecord::Base
 	# 	self.escola = Escola.find_by_nome(nome) if nome.present?
 	# end
 
+	before_save :maiusculas_sem_acentos
+
+	def maiusculas_sem_acentos
+
+		self.name = ActiveSupport::Inflector.transliterate(self.name).upcase if !self.name.blank?
+		
+	end
 
 
 end

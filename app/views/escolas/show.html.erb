@@ -18,22 +18,22 @@
 
 <p>
   <strong>Cep:</strong>
-  <%= @escola.cep %>
+  <%= detalhes(@escola.cep) %>
 </p>
 
 <p>
   <strong>Numero:</strong>
-  <%= @escola.numero %>
+  <%= detalhes(@escola.numero) %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @escola.email %>
+  <%= detalhes(@escola.email) %>
 </p>
 
 <p>
   <strong>Contato:</strong>
-  <%= @escola.contato %>
+  <%= detalhes(@escola.contato) %>
 </p>
 
 <%= link_to link_icone('voltar'), escolas_path, :class=>'btn btn-default', :title=>"Voltar" %> 

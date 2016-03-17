@@ -101,12 +101,14 @@ class PessoasController < ApplicationController
     end
 
     def colecoes
-      @lista_booleans = [['Nao',false], ['Sim',true]]
+      @lista_booleans = [['NAO',false], ['SIM',true]]
       @lista_sexos = [['M','M'], ['F','F']]
       @lista_documentos = [['RG','RG'], ['CPF','CPF'], ['CT','CT'], ['CN','CN']]
       @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'], ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
-      @lista_escolaridades = [['Fundamental - Incompleto','Fundamental - Incompleto'], ['Fundamental - Completo','Fundamental - Completo'], ['Medio - Incompleto','Medio - Completo'], ['Superior - Incompleto','Superior - Incompleto'], ['Superior - Completo','Superior - Completo']]
-      @lista_contatos = [['Residencial','Residencial'], ['Celular','Celular'], ['Trabalho','Trabalho']]
-      @lista_racas = [['Branca','Branca'], ['Preta','Preta'], ['Parda','Parda'], ['Indígena','Indígena'], ['Amarela','Amarela']]
+      @lista_escolaridades = [['FUNDAMENTAL - INCOMPLETO','FUNDAMENTAL - INCOMPLETO'], ['FUNDAMENTAL - COMPLETO','FUNDAMENTAL - COMPLETO'], ['MEDIO - INCOMPLETO','MEDIO - COMPLETO'], ['SUPERIOR - INCOMPLETO','SUPERIOR - INCOMPLETO'], ['SUPERIOR - COMPLETO','SUPERIOR - COMPLETO']]
+      @lista_contatos = [['RESIDENCIAL','RESIDENCIAL'], ['CELULAR','CELULAR'], ['TRABALHO','TRABALHO']]
+      @lista_racas = [['BRANCA','BRANCA'], ['PRETA','PRETA'], ['PARDA','PARDA'], ['INDIGENA','INDIGENA'], ['AMARELA','AMARELA']]
+      
+
     end
 end

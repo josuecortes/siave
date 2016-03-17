@@ -36,8 +36,8 @@
       <tr>
         <td><%= escola.codigo %></td>
         <td><%= escola.nome %></td>
-        <td><%= escola.email %></td>
-        <td><%= escola.contato %></td>
+        <td><%= detalhes(escola.email) %></td>
+        <td><%= detalhes(escola.contato) %></td>
         <td>
           <%= link_to link_icone('detalhes'),
                     escola_path(escola), :class => 'btn btn-default', :title=>"Detalhes" %>

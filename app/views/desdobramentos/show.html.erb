@@ -13,13 +13,13 @@
 
 <% if @desdobramento.tipo_agressor.blank? %>
   <p>
-    <strong>Tipo de Ocorrência:</strong>
-    <%= detalhes2(@desdobramento.tipo_ocorrencia, :descricao) %>
+    <strong>Tipo:</strong>
+    OCORRENCIA -> <%= detalhes2(@desdobramento.tipo_ocorrencia, :descricao) %>
   </p>
 <% else %>
   <p>
-    <strong>Tipo de Agressor:</strong>
-    <%= detalhes2(@desdobramento.tipo_agressor, :descricao) %>
+    <strong>Tipo:</strong>
+    AGRESSOR -> <%= detalhes2(@desdobramento.tipo_agressor, :descricao) %>
   </p>
 <% end %>
 

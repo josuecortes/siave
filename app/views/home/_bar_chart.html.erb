@@ -1,0 +1,52 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center text-uppercase">
+            <h2>OCORRÊNCIAS(<%= Ocorrencia.count %>)</h2>
+        </div>
+        <!-- //.text-center -->
+    </div>
+    <!-- //.col-md-12 -->
+</div>
+<!-- //.row -->
+
+<div class="row">
+		
+    <div class="col-md-12">
+        <div class="bar-chart">
+            
+
+            <% @total = Ocorrencia.count %>
+            
+            
+            <div class="chart clearfix">
+
+            		<%@ocorrencias.each do |desdobramento,ocorrencias|%>
+
+                  <div class="item">
+                      <div class="bar">
+                      		<% @per = (ocorrencias.count * 100) / @total %>
+                          <span class="percent"><%= @per %>%</span>
+          
+                          <div class="item-progress" data-percent="<%= @per %>">
+                              <span class="title"><%=desdobramento.descricao%> - <%= ocorrencias.count %></span>
+                          </div>
+                          <!-- //.item-progress -->
+                      </div>
+                      <!-- //.bar -->
+                  </div>
+                <!-- //.item -->
+
+               	<% end %>
+                
+                
+            </div>
+            <!-- //.chart -->
+        </div>
+        <!-- //.bar-chart -->
+    </div>
+    <!-- //.col-md-4 -->
+</div>
+<!-- //.row -->
+
+

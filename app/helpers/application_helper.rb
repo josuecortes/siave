@@ -177,8 +177,17 @@ module ApplicationHelper
 	  end
 	end
 
-	def detalhes(objeto)
+	def hora_br(objeto)
 	  if objeto	!= ""
+	  	hora = objeto.to_s(:time)
+	  	return raw(hora)
+	  else
+	    return raw("Nada Cadastrado")
+	  end
+	end
+
+	def detalhes(objeto)
+	  if !objeto.blank?
 	    return raw(objeto)
 	  else
 	    return raw("Nada Cadastrado")

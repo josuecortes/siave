@@ -11,7 +11,7 @@
 
     <%= f.input :data_ocorrencia, :label=>"Data da Ocorrência" %>
 
-    <%= f.input :horario_aproximado, :label=>"Horario Aproximado da Ocorrência" %>
+    <%= f.input :horario_aproximado, :label=>"Horario Aproximado da Ocorrência", include_blank: true %>
 
     <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia if @ocorrencia.tipo_ocorrencia)} %>  
 

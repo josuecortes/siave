@@ -31,4 +31,15 @@ class Pessoa < ActiveRecord::Base
   	end
   end
 
+  before_save :maiusculas_sem_acentos
+
+  def maiusculas_sem_acentos
+
+    self.nome = ActiveSupport::Inflector.transliterate(self.nome).upcase if !self.nome.blank?  
+    self.nome_responsavel = ActiveSupport::Inflector.transliterate(self.nome_responsavel).upcase if !self.nome_responsavel.blank?
+    self.numero = ActiveSupport::Inflector.transliterate(self.numero).upcase if !self.numero.blank?
+    self.complemento = ActiveSupport::Inflector.transliterate(self.complemento).upcase if !self.complemento.blank?
+
+  end
+
 end
