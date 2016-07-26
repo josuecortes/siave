@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
         sign_out(current_user)
         redirect_to root_url
       elsif current_user.ativo == true and current_user.mudar_senha == true
-        flash[:info] = "Você Precisa Mudar a Sua Senha. Sua Senha Atual é: mudarsenha"
+        flash[:info] = "Você Precisa Mudar a Sua Senha. Sua Senha Atual é: 12345678"
         redirect_to edit_user_registration_path
       end
     end

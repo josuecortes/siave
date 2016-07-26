@@ -12,6 +12,11 @@
 </p>
 
 <p>
+  <strong>Nome Social ou Apelido:</strong>
+  <%= detalhes(@pessoa.nome_social) %>
+</p>
+
+<p>
   <strong>Data nascimento:</strong>
   <%= data_br(@pessoa.data_nascimento) %>
 </p>
@@ -71,25 +76,33 @@
 </p>
 
 <p>
-  <strong>Cep:</strong>
-  <%= @pessoa.cep %>
+  <strong>Logradouro:</strong>
+  <%= detalhes(@pessoa.logradouro) %>
 </p>
 
 <p>
   <strong>Numero:</strong>
-  <%= @pessoa.numero %>
+  <%= detalhes(@pessoa.numero) %>
 </p>
 
 <p>
-  <strong>Complemento:</strong>
-  <%= @pessoa.complemento %>
+  <strong>Bairro:</strong>
+  <%= detalhes(@pessoa.bairro) %>
 </p>
 
 <p>
-  <strong>Contatos:</strong>
-  <% @pessoa.contatos.each do |c| %>
-    <%= c.tipo %> - <%= c.numero %><br/>
-  <% end %>
+  <strong>Cidade:</strong>
+  <%= detalhes(@pessoa.cidade) %>
+</p>
+
+<p>
+  <strong>Cep:</strong>
+  <%= detalhes(@pessoa.cep) %>
+</p>
+
+<p>
+  <strong>Contato:</strong>
+  <%= detalhes(@pessoa.contato) %>
 </p>
 
 <%= link_to link_icone('voltar'), pessoas_path, :class=>'btn btn-default', :title=>"Voltar" %> 

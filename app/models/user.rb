@@ -31,5 +31,32 @@ class User < ActiveRecord::Base
 		
 	end
 
+	def e_de_escola
+    r = Role.where(:nome=>"ESCOLA").first
+    if self.roles.include?r
+      return true
+    else
+      return false
+    end 
+  end
+
+  def e_admin
+    r = Role.where(:nome=>"ADMINISTRADOR").first
+    if self.roles.include?r
+      return true
+    else
+      return false
+    end 
+  end
+
+  def e_de_orgao
+    r = Role.where(:nome=>"ORGAO").first
+    if self.roles.include?r
+      return true
+    else
+      return false
+    end 
+  end
+
 
 end

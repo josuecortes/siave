@@ -26,6 +26,9 @@ u = User.find_by(:name=>"ADMINISTRADOR DO SISTEMA", :email=>"siave@seed.ap.gov.b
 
 a = Role.find_or_create_by(:nome=>"ADMINISTRADOR")
 
+Role.find_or_create_by(:nome=>"ESCOLA")
+Role.find_or_create_by(:nome=>"ORGAO")
+
 if !u.roles.include?a
 	u.roles<<a
 end

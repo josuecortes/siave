@@ -8,7 +8,7 @@ class TipoDesdobramentosController < ApplicationController
     #@tipo_desdobramentos = TipoDesdobramento.all
     #@desdobramentos = Desdobramento.all
     @q = TipoDesdobramento.ransack(params[:q])
-    @tipo_desdobramentos = @q.result.accessible_by(current_ability).order('created_at ASC').paginate(:page => params[:page], :per_page => @@per_page)
+    @tipo_desdobramentos = @q.result.accessible_by(current_ability).order('descricao ASC').paginate(:page => params[:page], :per_page => @@per_page)
     
   end
 
@@ -33,7 +33,7 @@ class TipoDesdobramentosController < ApplicationController
 
     respond_to do |format|
       if @tipo_desdobramento.save
-        format.html { redirect_to @tipo_desdobramento, notice: 'Tipo desdobramento was successfully created.' }
+        format.html { redirect_to @tipo_desdobramento, notice: @@msgs }
         format.json { render :show, status: :created, location: @tipo_desdobramento }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class TipoDesdobramentosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_desdobramento.update(tipo_desdobramento_params)
-        format.html { redirect_to @tipo_desdobramento, notice: 'Tipo desdobramento was successfully updated.' }
+        format.html { redirect_to @tipo_desdobramento, notice: @@msgs }
         format.json { render :show, status: :ok, location: @tipo_desdobramento }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class TipoDesdobramentosController < ApplicationController
   def destroy
     @tipo_desdobramento.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_desdobramentos_url, notice: 'Tipo desdobramento was successfully destroyed.' }
+      format.html { redirect_to tipo_desdobramentos_url, notice: @@msgs }
       format.json { head :no_content }
     end
   end

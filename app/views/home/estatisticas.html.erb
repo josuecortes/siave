@@ -1,0 +1,76 @@
+<%= titulo_pagina("Estatísticas","") %>
+
+<%= form_tag("/home/estatisticas", method: "get") do %>
+ 	<strong>DATA INICIAL:</strong>
+  <%= select_tag(:data_inicial) %>
+    
+  <strong>DATA FINAL:</strong>
+  <%= select_tag(:data_final) %>
+  
+  <strong>TIPO DE OCORRENCIA:</strong>
+  <%= select_tag(:tipo) %>
+
+	<strong>ESCOLA:</strong>
+  <%= select_tag(:ESCOLA) %>  
+
+  <%= submit_tag("Pesquisar") %>
+<% end %>
+
+<br/><br/>
+<h3><strong>Período pesquisado: <%= @ini.to_s_br %> a <%= @fim.to_s_br %></strong></h3>
+<h4><strong>Total de Chamados: <%= Chamadolite.no_periodo(@ini,@fim).count.to_int %> </strong></h4>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Usuário</th>
+			<th>Aberturas</th>
+			<th>Conclusões</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @usuarios.each do |u| %>
+			<% a = u.chamados_que_abriu.no_periodo(@ini,@fim).count %>
+			<% c = u.chamados_que_concluiu.no_periodo(@ini,@fim).count %>
+			<% if a > 0 or c > 0 %>
+				<tr>
+					<td><%= u.nome %></td>
+					<td><%= a.to_i %></td>
+					<td><%= c.to_i %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+
+<table class="table">
+  <thead>
+  	<tr>
+      <th>Departamentos</th>
+    </tr>
+  </thead>
+  <tbody>
+  	
+    <tr>
+	    <td>
+	     	<% @departamentos.each do |d| %>
+	    		<% total = d.chamadolites.no_periodo(@ini,@fim).count %>
+	    		<% if total > 0 %>
+		    		<strong><%= "#{d.sigla} - #{total.to_int} " %></strong><br/>
+		    		<% problemas = d.problemas(@ini,@fim) %>
+		    		<% problemas.each do |p| %>
+		    			&nbsp;&nbsp;&nbsp;<%= p %><br/>
+		    		<% end %>
+		    		<br/>
+		    	<% end %>
+	    	<% end %>
+
+	    </td>
+	    
+    </tr>
+  </tbody>
+</table>
+
+
+
+

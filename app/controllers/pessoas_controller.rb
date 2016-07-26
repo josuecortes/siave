@@ -94,8 +94,9 @@ class PessoasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pessoa_params
-      params.require(:pessoa).permit(:nome, :data_nascimento, :sexo, :raca, :escolaridade, 
+      params.require(:pessoa).permit(:nome, :nome_social, :data_nascimento, :sexo, :raca, :escolaridade, 
                                       :documento, :tipo_documento, :numero_documento, :deficiente,
+                                      :contato, :logradouro, :bairro, :cidade,
                                       :tipo_deficiencia, :nome_responsavel, :cep, :numero, :complemento,
                                       contatos_attributes: [:id, :tipo, :numero, :_destroy])
     end
@@ -104,10 +105,17 @@ class PessoasController < ApplicationController
       @lista_booleans = [['NAO',false], ['SIM',true]]
       @lista_sexos = [['M','M'], ['F','F']]
       @lista_documentos = [['RG','RG'], ['CPF','CPF'], ['CT','CT'], ['CN','CN']]
-      @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'], ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
-      @lista_escolaridades = [['FUNDAMENTAL - INCOMPLETO','FUNDAMENTAL - INCOMPLETO'], ['FUNDAMENTAL - COMPLETO','FUNDAMENTAL - COMPLETO'], ['MEDIO - INCOMPLETO','MEDIO - COMPLETO'], ['SUPERIOR - INCOMPLETO','SUPERIOR - INCOMPLETO'], ['SUPERIOR - COMPLETO','SUPERIOR - COMPLETO']]
+      @lista_deficiencias = [['FISICA','FISICA'], ['VISUAL','VISUAL'], ['AUDITIVA','AUDITIVA'],
+                             ['MENTAL','MENTAL'], ['MULTIPLAS','MULTIPLAS']]
+      @lista_escolaridades = [['FUNDAMENTAL - INCOMPLETO','FUNDAMENTAL - INCOMPLETO'],
+                             ['FUNDAMENTAL - COMPLETO','FUNDAMENTAL - COMPLETO'],
+                             ['MEDIO - INCOMPLETO','MEDIO - INCOMPLETO'], 
+                             ['MEDIO - COMPLETO','MEDIO - COMPLETO'],
+                             ['SUPERIOR - INCOMPLETO','SUPERIOR - INCOMPLETO'],
+                             ['SUPERIOR - COMPLETO','SUPERIOR - COMPLETO']]
       @lista_contatos = [['RESIDENCIAL','RESIDENCIAL'], ['CELULAR','CELULAR'], ['TRABALHO','TRABALHO']]
-      @lista_racas = [['BRANCA','BRANCA'], ['PRETA','PRETA'], ['PARDA','PARDA'], ['INDIGENA','INDIGENA'], ['AMARELA','AMARELA']]
+      @lista_racas = [['BRANCA','BRANCA'], ['PRETA','PRETA'], ['PARDA','PARDA'], ['INDIGENA','INDIGENA'],
+                     ['AMARELA','AMARELA']]
       
 
     end

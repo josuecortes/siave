@@ -24,7 +24,7 @@
   <thead>
     <tr>
       <th>Número Protocolo</th>
-      <th>Sob Influência</th>
+      <th>Escola</th>
       <th>Tipo de Ocorrência</th>
       <th>Encaminhamento</th>
       <th>Ações</th>
@@ -35,8 +35,8 @@
     <% @ocorrencias.each do |ocorrencia| %>
       <tr>
         <td><%= ocorrencia.numero_protocolo %></td>
-        <td><%= ocorrencia.sob_influencia %></td>
-        <td><%= detalhes2(ocorrencia.tipo_ocorrencia, :descricao) %></td>
+        <td><%= detalhes2(ocorrencia.escola, :nome) %></td>
+        <td><%= detalhes2(ocorrencia.tipo_desdobramento_ocorrencia, :descricao) %></td>
         <td><%= detalhes2(ocorrencia.encaminhamento, :descricao) %></td>
         <td>
           <%= link_to link_icone('detalhes'),

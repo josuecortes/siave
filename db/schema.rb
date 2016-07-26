@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316161700) do
+ActiveRecord::Schema.define(version: 20160620113309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160316161700) do
     t.string   "local_ocorrencia"
     t.integer  "escola_id"
     t.integer  "user_id"
+    t.text     "observacoes"
   end
 
   add_index "ocorrencias", ["encaminhamento_id"], name: "index_ocorrencias_on_encaminhamento_id", using: :btree
@@ -103,6 +104,11 @@ ActiveRecord::Schema.define(version: 20160316161700) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.boolean  "documento"
+    t.string   "contato"
+    t.string   "logradouro"
+    t.string   "cidade"
+    t.string   "bairro"
+    t.string   "nome_social"
   end
 
   create_table "roles", force: :cascade do |t|

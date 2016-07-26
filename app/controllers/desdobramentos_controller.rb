@@ -88,6 +88,6 @@ class DesdobramentosController < ApplicationController
     end
 
     def colecoes
-      @lista_tipos = [['TIPO DE OCORRENCIA','TIPO DE OCORRENCIA'], ['TIPO DE AGRESSOR','TIPO DE AGRESSOR']]
+      @lista_tipos = [['TIPO DE OCORRENCIA','TIPO DE OCORRENCIA']]
     end
 end

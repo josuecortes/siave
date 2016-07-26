@@ -7,39 +7,23 @@
 
   <div class="form-inputs">
 
-    <%= f.input :local_ocorrencia, collection: @lista_locais, :label=>"Local da Ocorrência", include_blank: true %>  
+    <%= f.input :local_ocorrencia, collection: @lista_locais.sort, :label=>"Local da Ocorrência", include_blank: true %>  
 
     <%= f.input :data_ocorrencia, :label=>"Data da Ocorrência" %>
 
     <%= f.input :horario_aproximado, :label=>"Horario Aproximado da Ocorrência", include_blank: true %>
 
-    <%= f.association :tipo_ocorrencia, collection: TipoOcorrencia.order([:descricao]), :label=>"Tipo de Ocorrência", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_ocorrencia", :value=>(@ocorrencia.tipo_ocorrencia if @ocorrencia.tipo_ocorrencia)} %>  
-
-    <div id="desdobramento_tipo_ocorrencia">
-      <%if !@ocorrencia.new_record?%>
-
-        <%= f.input :desdobramento_tipo_ocorrencia_id, collection: @desdobramentos_tipo_ocorrencia, :label=>"Desdobramento da Ocorrência", include_blank: true if (!@ocorrencia.desdobramento_tipo_ocorrencia.nil? or (@ocorrencia.tipo_ocorrencia and @ocorrencia.tipo_ocorrencia.desdobramentos.any?))%>
-
-        <div id="tipo_desdobramento_ocorrencia">
-          <%= f.input :tipo_desdobramento_ocorrencia_id, collection: @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t|[t.descricao,t.id]}, :label=>"Tipo de Desdobramento da Ocorrência", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_ocorrencia_id"}   if (!@ocorrencia.tipo_desdobramento_ocorrencia.nil? or (@ocorrencia.desdobramento_tipo_ocorrencia and @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.any?))%>  
-        </div>
-
-
-        <script type="text/javascript">
-
-            jQuery(function($) {$("#ocorrencia_desdobramento_tipo_ocorrencia_id").change(function() {
-              // make a POST call and replace the content
-              var desdobramento_tipo_ocorrencia = $('#ocorrencia_desdobramento_tipo_ocorrencia_id').val();
-              jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_ocorrencia/?desdobramento_tipo_ocorrencia=" + desdobramento_tipo_ocorrencia, function(data){
-                $("#tipo_desdobramento_ocorrencia").html(data);   
-              });
-            });
-          });
-
-        </script>
-
-      <% end %>
+    <div class="pull-right">
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalTipoOcorrencia">
+        Lista de Tipo de Ocorrencias
+      </button>
     </div>
+
+    <%= f.input :tipo_desdobramento_ocorrencia_nome, :label=>"Selecione o Tipo de Ocorrência", :url => autocomplete_tipo_desdobramento_ocorrencia_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#tipo_desdobramento_ocorrencia_id" ,:input_html=>{:value=>(@ocorrencia.tipo_desdobramento_ocorrencia.descricao if @ocorrencia.tipo_desdobramento_ocorrencia)}%>
+    
+    <%= f.input :tipo_desdobramento_ocorrencia_id, :as => :hidden, :input_html => { :id => "tipo_desdobramento_ocorrencia_id"} %>
+
+    <%= f.input :observacoes, :label=>"Observações" %>
 
 
     <div class="row">
@@ -47,12 +31,12 @@
         <div class="row">
 
           <div class="col-md-6">
-            <%= f.input :agredido_nome, :label=>"Pessoa Agredida", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agredido_id" ,:input_html=>{:value=>(@ocorrencia.agredido.nome if @ocorrencia.agredido)}%>
+            <%= f.input :agredido_nome, :label=>"Selecione a Pessoa Agredida", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agredido_id" ,:input_html=>{:value=>(@ocorrencia.agredido.nome if @ocorrencia.agredido)}%>
 
             <%= f.input :agredido_id, :as => :hidden, :input_html => { :id => "agredido_id"} %>   
           </div>
           <div class="col-md-6">
-            <%= f.input :agressor_nome, :label=>"Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
+            <%= f.input :agressor_nome, :label=>"Selecione o Agressor", :url => autocomplete_pessoa_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#agressor_id" ,:input_html=>{:value=>(@ocorrencia.agressor.nome if @ocorrencia.agressor)}%>
 
             <%= f.input :agressor_id, :as => :hidden, :input_html => { :id => "agressor_id"} %>
           </div>
@@ -67,35 +51,17 @@
 
     <br/>
 
-    <%= f.association :tipo_agressor, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:id => "ocorrencia_tipo_agressor", :value=>(@ocorrencia.tipo_agressor if @ocorrencia.tipo_agressor)} %>  
-
-    <div id="desdobramento_tipo_agressor">
-      <%if !@ocorrencia.new_record?%>
-
-        <%= f.input :desdobramento_tipo_agressor_id, collection: @desdobramentos_tipo_agressor, :label=>"Desdobramento do Agressor", include_blank: true if (!@ocorrencia.desdobramento_tipo_agressor.nil? or (@ocorrencia.tipo_agressor and @ocorrencia.tipo_agressor.desdobramentos.any?))%>  
-
-        <div id="tipo_desdobramento_agressor">
-          <%= f.input :tipo_desdobramento_agressor_id, collection: @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.collect{|t|[t.descricao,t.id]}, :label=>"Tipo de Desdobramento do Agressor", include_blank: true ,:input_html=>{:id=>"tipo_desdobramento_agressor_id"} if (!@ocorrencia.tipo_desdobramento_agressor.nil? or (@ocorrencia.desdobramento_tipo_agressor and @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.any?))%>  
-        </div>  
-
-
-        <script type="text/javascript">
-
-            jQuery(function($) {$("#ocorrencia_desdobramento_tipo_agressor_id").change(function() {
-              // make a POST call and replace the content
-              var desdobramento_tipo_agressor = $('#ocorrencia_desdobramento_tipo_agressor_id').val();
-              jQuery.post(gon.suburi+"/ocorrencias/tipo_desdobramento_agressor/?desdobramento_tipo_agressor=" + desdobramento_tipo_agressor, function(data){
-                $("#tipo_desdobramento_agressor").html(data);   
-              });
-            });
-          });
-
-        </script>
-
-      <% end %>
+    <div class="pull-right">
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalTipoAgressor">
+        Lista de Tipo de Agressores
+      </button>
     </div>
 
-    <%= f.input :sob_influencia, collection: @lista_influencias, as: :select, :include_blank => false %>
+    <%= f.input :tipo_agressor_nome, :label=>"Selecione o Tipo de Agressor", :url => autocomplete_tipo_agressor_nome_ocorrencias_path, :as => :autocomplete, :id_element => "#tipo_agressor_id" ,:input_html=>{:value=>(@ocorrencia.tipo_agressor.descricao if @ocorrencia.tipo_agressor)}%>
+
+    <%= f.input :tipo_agressor_id, :as => :hidden, :input_html => { :id => "tipo_agressor_id"} %>
+
+    <%= f.input :sob_influencia, collection: @lista_influencias, as: :select, :include_blank => true %>
 
     <%= f.association :encaminhamento, collection: Encaminhamento.order([:descricao]), :label=>"Encaminhamento", label_method: :descricao, value_method: :id, include_blank: true %>
 
@@ -113,7 +79,49 @@
 <% end %>
 
 
+<!-- Modal -->
+<div class="modal fade" id="myModalTipoOcorrencia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tipos de Ocorrencias Cadastradas</h4>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <% @ocorrencias_cadastradas.each do |o| %>
+            <li><%= o.descricao %></li>
+          <% end %>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+<div class="modal fade" id="myModalTipoAgressor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tipos de Agressores Cadastrados</h4>
+      </div>
+      <div class="modal-body">
+        <ol>
+          <% @agressores_cadastrados.each do |a| %>
+            <li><%= a.descricao %></li>
+          <% end %>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <%= render "form_pessoa" %>

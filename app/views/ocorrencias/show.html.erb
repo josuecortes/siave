@@ -41,18 +41,11 @@
   <%= @ocorrencia.sob_influencia %>
 </p>
 
-<p>
-  <strong>Tipo de Ocorrência:</strong>
-  <%= detalhes2(@ocorrencia.tipo_ocorrencia, :descricao) %>
-</p>
 
 <p>
-  <strong>Desdobramento da Ocorrencia:</strong>
-  <%= detalhes2(@ocorrencia.desdobramento_tipo_ocorrencia, :descricao) %>
-</p>
-
-<p>
-  <strong>Tipo do Desdobramento da Ocorrencia:</strong>
+  <strong>Tipo de Ocorrencia:</strong>
+  <%= detalhes2(@ocorrencia.tipo_desdobramento_ocorrencia.desdobramento.tipo_ocorrencia, :descricao) %>
+  <%= detalhes2(@ocorrencia.tipo_desdobramento_ocorrencia.desdobramento, :descricao) %>
   <%= detalhes2(@ocorrencia.tipo_desdobramento_ocorrencia, :descricao) %>
 </p>
 
@@ -60,17 +53,6 @@
   <strong>Tipo de Agressor:</strong>
   <%= detalhes2(@ocorrencia.tipo_agressor, :descricao) %>
 </p>
-
-<p>
-  <strong>Desdobramento do Tipo de Agressor:</strong>
-  <%= detalhes2(@ocorrencia.desdobramento_tipo_agressor, :descricao) %>
-</p>
-
-<p>
-  <strong>Tipo do Desdobramento do Agressor:</strong>
-  <%= detalhes2(@ocorrencia.tipo_desdobramento_agressor, :descricao) %>
-</p>
-
 
 <p>
   <strong>Encaminhamento:</strong>

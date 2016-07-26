@@ -31,12 +31,12 @@ class OcorrenciasController < ApplicationController
 
   # GET /ocorrencias/1/edit
   def edit
-    @tipo_ocorrencia = @ocorrencia.tipo_ocorrencia
-    @desdobramentos_tipo_ocorrencia = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_ocorrencia
-    @tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_ocorrencia
-    @tipo_agressor = @ocorrencia.tipo_agressor
-    @desdobramentos_tipo_agressor = @tipo_agressor.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_agressor
-    @tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_agressor
+    #@tipo_ocorrencia = @ocorrencia.tipo_ocorrencia
+    #@desdobramentos_tipo_ocorrencia = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_ocorrencia
+    #@tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_ocorrencia.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_ocorrencia
+    #@tipo_agressor = @ocorrencia.tipo_agressor
+    #@desdobramentos_tipo_agressor = @tipo_agressor.desdobramentos.collect{|t| [t.descricao, t.id]} if @tipo_agressor
+    #@tipo_desdobramentos_ocorrencia = @ocorrencia.desdobramento_tipo_agressor.tipo_desdobramentos.collect{|t| [t.descricao, t.id]} if @ocorrencia.desdobramento_tipo_agressor
   end
 
   # POST /ocorrencias
@@ -93,47 +93,21 @@ class OcorrenciasController < ApplicationController
     end
   end
 
-  #desdobramento ocorrencia
-  def desdobramento_tipo_ocorrencia
-    if !params[:tipo_ocorrencia].blank?
-      @tipo_ocorrencia = TipoOcorrencia.find(params[:tipo_ocorrencia])
-      @desdobramentos = @tipo_ocorrencia.desdobramentos.collect{|t| [t.descricao, t.id]}
-      render :partial => "desdobramentos_tipo_ocorrencia"
-    else
-      render :nothing => true
-    end
+  def autocomplete_tipo_desdobramento_ocorrencia_nome
+    term = params[:term]
+    ocorrencias = TipoDesdobramento.where('descricao ilike ?',"%#{term}%").order(:descricao).all
+    render :json => ocorrencias.map { |ocorrencia| {:id => ocorrencia.id,:label => ocorrencia.descricao, :value => ocorrencia.descricao} }
   end
 
-  def tipo_desdobramento_ocorrencia
-    if !params[:desdobramento_tipo_ocorrencia].blank?
-      @desdobramento = Desdobramento.find(params[:desdobramento_tipo_ocorrencia])
-      @tipo_desdobramentos_ocorrencia = @desdobramento.tipo_desdobramentos.collect{|t| [t.descricao, t.id]}
-      render :partial => "tipo_desdobramento_ocorrencia"
-    else
-      render :nothing => true
-    end
+  def autocomplete_tipo_agressor_nome
+    term = params[:term]
+    agressores = TipoAgressor.where('descricao ilike ?',"%#{term}%").order(:descricao).all
+    render :json => agressores.map { |agressor| {:id => agressor.id,:label => agressor.descricao, :value => agressor.descricao} }
+
+
   end
 
-  #desdobramento agressor
-  def desdobramento_tipo_agressor
-    if !params[:tipo_agressor].blank?
-      @tipo_agressor = TipoAgressor.find(params[:tipo_agressor])
-      @desdobramentos = @tipo_agressor.desdobramentos.collect{|t| [t.descricao, t.id]}
-      render :partial => "desdobramentos_tipo_agressor"
-    else
-      render :nothing => true
-    end
-  end
-
-  def tipo_desdobramento_agressor
-    if !params[:desdobramento_tipo_agressor].blank?
-      @desdobramento = Desdobramento.find(params[:desdobramento_tipo_agressor])
-      @tipo_desdobramentos_agressor = @desdobramento.tipo_desdobramentos.collect{|t| [t.descricao, t.id]}
-      render :partial => "tipo_desdobramento_agressor"
-    else
-      render :nothing => true
-    end
-  end
+  
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -143,23 +117,27 @@ class OcorrenciasController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ocorrencia_params
-    params.require(:ocorrencia).permit(:numero_protocolo, :local_ocorrencia, :data_ocorrencia, :horario_aproximado,
-                                       :sob_influencia, :encaminhamento_id, :tipo_ocorrencia_id, 
-                                       :tipo_agressor_id, :agredido_id, :agressor_id,
-                                       :desdobramento_tipo_ocorrencia_id, :tipo_desdobramento_ocorrencia_id,
-                                       :desdobramento_tipo_agressor_id, :tipo_desdobramento_agressor_id,
-                                       :user_id, :escola_id )
+    params.require(:ocorrencia).permit(:numero_protocolo, :local_ocorrencia, :data_ocorrencia, 
+                                       :horario_aproximado, :observacoes,
+                                       :sob_influencia, :encaminhamento_id, 
+                                       :tipo_agressor_id, 
+                                       :agredido_id, :agressor_id,
+                                       :tipo_desdobramento_ocorrencia_id,
+                                       :user_id, :escola_id, :agredido_nome, 
+                                       :agressor_nome, :tipo_agressor_nome,
+                                       :tipo_desdobramento_ocorrencia_nome)
   end
 
   def pessoa_params
-    params.require(:pessoa).permit(:nome, :data_nascimento, :sexo, :raca, :escolaridade,
+    params.require(:pessoa).permit(:nome, :observacoes, :data_nascimento, :sexo, :raca, :escolaridade,
                                    :documento, :tipo_documento, :numero_documento, :deficiente,
                                    :tipo_deficiencia, :nome_responsavel, :cep, :numero, :complemento,
                                    contatos_attributes: [:id, :tipo, :numero, :_destroy])
   end
 
     def colecoes
-      @lista_influencias = [['NAO','NAO'], ['ALCOOL','ALCOOL'], ['OUTRAS DROGAS','OUTRAS DROGAS']]
+      @lista_influencias = [['NAO','NAO'], ['DROGAS LICITAS','DROGAS LICITAS'],
+                           ['DROGAS ILICITAS','DROGAS ILICITAS']]
       @pessoa = Pessoa.new
       @lista_booleans = [['NAO',false], ['SIM',true]]
       @lista_sexos = [['M','M'], ['F','F']]
@@ -168,6 +146,10 @@ class OcorrenciasController < ApplicationController
       @lista_escolaridades = [['FUNDAMENTAL - INCOMPLETO','FUNDAMENTAL - INCOMPLETO'], ['FUNDAMENTAL - COMPLETO','FUNDAMENTAL - COMPLETO'], ['MEDIO - INCOMPLETO','MEDIO - COMPLETO'], ['SUPERIOR - INCOMPLETO','SUPERIOR - INCOMPLETO'], ['SUPERIOR - COMPLETO','SUPERIOR - COMPLETO']]
       @lista_contatos = [['RESIDENCIAL','RESIDENCIAL'], ['CELULAR','CELULAR'], ['TRABALHO','TRABALHO']]
       @lista_racas = [['BRANCA','BRANCA'], ['PRETA','PRETA'], ['PARDA','PARDA'], ['INDIGENA','INDIGENA'], ['AMARELA','AMARELA']]
-      @lista_locais = [['SALA DE AULA','SALA DE AULA'], ['QUADRA DE ESPORTE','QUADRA DE ESPORTE'], ['BIBLIOTECA','BIBLIOTECA'], ['CORREDOR DA ESCOLA','CORREDOR DA ESCOLA'], ['VIA PUBLICA','VIA PUBLICA']]
+      
+      @lista_locais = ['SALA DE AULA','QUADRA DE ESPORTE','BIBLIOTECA','CORREDOR DA ESCOLA','VIA PUBLICA','SECRETARIA','SALA DE LEITURA','SALA DE ALMOXARIFADO','SALA DE INFORMATICA','TV ESCOLA','SANITARIO ALUNOS','SANITARIO ADMINISTRATIVO','SANITARIO FUNCIONARIOS','RECREIO COBERTO','CAMPO ESPORTIVO','REFEITORIO','AUDITORIO','COZINHA','SUPERVISAO PEDAGOGICA','SALA DOS PROFESSORES','DIRECAO']
+
+      @agressores_cadastrados = TipoAgressor.order('descricao ASC').all
+      @ocorrencias_cadastradas = TipoDesdobramento.order('descricao ASC').all
     end
 end

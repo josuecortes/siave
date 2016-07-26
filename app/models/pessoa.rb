@@ -11,7 +11,7 @@ class Pessoa < ActiveRecord::Base
 
 	accepts_nested_attributes_for :contatos, allow_destroy: true
 
-	validates_presence_of :nome, :data_nascimento, :sexo, :cep, :numero, :nome_responsavel
+	validates_presence_of :nome, :data_nascimento, :sexo, :nome_responsavel
 
 	validates_uniqueness_of :nome, :scope => [:data_nascimento]
 
@@ -19,7 +19,7 @@ class Pessoa < ActiveRecord::Base
 
 	validates_presence_of :tipo_deficiencia, :if => :deficiente
 
-	validates_presence_of :contatos
+	#validates_presence_of :contatos
 
   def verificar_documento_deficiente
   	if self.documento == false
@@ -40,6 +40,12 @@ class Pessoa < ActiveRecord::Base
     self.numero = ActiveSupport::Inflector.transliterate(self.numero).upcase if !self.numero.blank?
     self.complemento = ActiveSupport::Inflector.transliterate(self.complemento).upcase if !self.complemento.blank?
 
+    self.logradouro = ActiveSupport::Inflector.transliterate(self.logradouro).upcase if !self.logradouro.blank?
+
+    self.bairro = ActiveSupport::Inflector.transliterate(self.bairro).upcase if !self.bairro.blank?
+    self.cidade = ActiveSupport::Inflector.transliterate(self.cidade).upcase if !self.cidade.blank?
+    self.nome_social = ActiveSupport::Inflector.transliterate(self.nome_social).upcase if !self.nome_social.blank?
+    
   end
 
 end

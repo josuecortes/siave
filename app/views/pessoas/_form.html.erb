@@ -3,6 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :nome %>
+    <%= f.input :nome_social, :label=>"Nome Social ou Apelido" %>
     <%= f.input :data_nascimento %>
     <%= f.input :sexo, collection: @lista_sexos, as: :select, :include_blank => true %>
     <%= f.input :raca, :label=>"Raça/Cor", collection: @lista_racas, as: :select, :include_blank => true %>
@@ -30,26 +31,15 @@
     </div>    
     
     <%= f.input :nome_responsavel %>
-    <%= f.input :cep %>
+    
+    <%= f.input :logradouro %>
     <%= f.input :numero %>
-    <%= f.input :complemento %>
-
-    <div id="contatos">
-      <%= f.fields_for :contatos, :wrapper => false, :html=>{:class=>"form-inline"} do |cf| %>
-        <div class="fields">
-          <%= cf.input :tipo,  :label=>"Tipo Contato", collection: @lista_contatos, as: :select, :include_blank => true %>
-          <%= cf.input :numero %>
-          <div class="pull-right">
-            <%= cf.link_to_remove link_icone2("apagar","Remover Contato"), :class=>'btn btn-danger' %>
-          </div>
-          <br/>
-        </div>
-      <% end %>
-    </div>
-    <div class="form-actions">
-      <%= f.link_to_add link_icone2("novo","Adicionar Contato"), :contatos, :data => { :target => "#contatos" }, :class=>'btn btn-success' %>
-    </div>
-    <br/>
+    <%= f.input :bairro %>
+    <%= f.input :cidade %>
+    <%= f.input :cep %>
+    
+    <%= f.input :contato %>
+    
 
   </div>
 

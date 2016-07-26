@@ -28,6 +28,11 @@ Rails.application.routes.draw do
 
     post :tipo_desdobramento_agressor, :on => :collection
 
+
+    get :autocomplete_tipo_desdobramento_ocorrencia_nome, :on => :collection
+
+    get :autocomplete_tipo_agressor_nome, :on => :collection
+
   
   end
 
@@ -45,6 +50,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   get 'home/nao_autorizado'
+  get 'home/estatisticas'
   
   resources :usuarios do
 

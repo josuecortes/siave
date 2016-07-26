@@ -38,8 +38,8 @@
   <p class="text-danger">Atenção: A senha gerada sera: "12345678"</p>
   <p class="text-info">Apos o primeiro login o usuario sera redirecionado e solicitado a mudar sua senha. <br/>Apos mudar sua senha o usuario tera que efetuar novamente o login.</p>
 
-  <%= f.input :password, :as => :hidden, :input_html => {value: "mudarsenha"} %>
-  <%= f.input :password_confirmation, :as => :hidden, :input_html => {value: "mudarsenha"} %>
+  <%= f.input :password, :as => :hidden, :input_html => {value: "12345678"} %>
+  <%= f.input :password_confirmation, :as => :hidden, :input_html => {value: "12345678"} %>
 
   <div class="form-actions">
     <%= f.button :submit, 'Criar Usuário', :class => 'btn btn-primary' %>

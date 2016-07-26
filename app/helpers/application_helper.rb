@@ -219,6 +219,12 @@ module ApplicationHelper
 			when 'ADMINISTRADOR'
 				html+="AD "
 
+			when 'ESCOLA'
+				html+="ESC "
+
+			when 'ORGAO'
+				html+="ORG "
+
 			
 
 		end

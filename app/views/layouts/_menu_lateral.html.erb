@@ -9,15 +9,33 @@
           <% else %>
             <li><a href="<%= unauthenticated_root_url %>"><i class="glyphicon glyphicon-home"></i> Home</a></li>
           <% end %>
-          <li> <a href="<%=usuarios_path%>"><i class="glyphicon glyphicon-user"></i> Usuários</a></li>
-          <li> <a href="<%=pessoas_path%>"><i class="glyphicon glyphicon-user"></i> Pessoas</a></li>
-          <li> <a href="<%=escolas_path%>"><i class="glyphicon glyphicon-home"></i> Escolas</a></li>
-          <li> <a href="<%=ocorrencias_path%>"><i class="glyphicon glyphicon-bullhorn"></i> Ocorrências</a></li>
-          <li> <a href="<%=encaminhamentos_path%>"><i class="glyphicon glyphicon-file"></i> Encaminhamentos</a></li>
-          <li> <a href="<%=tipo_ocorrencias_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Ocorrências</a></li>
-          <li> <a href="<%=tipo_agressores_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Agressores</a></li>
-          <li> <a href="<%=desdobramentos_path%>"><i class="glyphicon glyphicon-ok"></i> Desdobramentos</a></li>
-          <li> <a href="<%=tipo_desdobramentos_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Desdobramentos</a></li>
+          <% if can? :read, User %>
+            <li> <a href="<%=usuarios_path%>"><i class="glyphicon glyphicon-user"></i> Usuários</a></li>
+          <% end %>
+          <% if can? :read, Pessoa %>
+            <li> <a href="<%=pessoas_path%>"><i class="glyphicon glyphicon-user"></i> Pessoas</a></li>
+          <% end %>
+          <% if can? :read, Escola %>
+            <li> <a href="<%=escolas_path%>"><i class="glyphicon glyphicon-home"></i> Escolas</a></li>
+          <% end %>
+          <% if can? :read, Ocorrencia %>
+            <li> <a href="<%=ocorrencias_path%>"><i class="glyphicon glyphicon-bullhorn"></i> Ocorrências</a></li>
+          <% end %>
+          <% if can? :read, Encaminhamento %>
+            <li> <a href="<%=encaminhamentos_path%>"><i class="glyphicon glyphicon-file"></i> Encaminhamentos</a></li>
+          <% end %>
+          <% if can? :read, TipoOcorrencia %>
+            <li> <a href="<%=tipo_ocorrencias_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Ocorrências</a></li>
+          <% end %>
+          <% if can? :read, TipoAgressor %>
+            <li> <a href="<%=tipo_agressores_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Agressores</a></li>
+          <% end %>
+          <% if can? :read, Desdobramento %>
+            <li> <a href="<%=desdobramentos_path%>"><i class="glyphicon glyphicon-ok"></i> Desdobramento de Ocorrencias</a></li>
+          <% end %>
+          <% if can? :read, TipoDesdobramento %>
+            <li> <a href="<%=tipo_desdobramentos_path%>"><i class="glyphicon glyphicon-ok"></i> Tipo Desdobramentos</a></li>
+          <% end %>
           
       
       </ul>

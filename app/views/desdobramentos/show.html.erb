@@ -6,11 +6,6 @@
   </h4>
 <% end %>
 
-<p>
-  <strong>Descricao:</strong>
-  <%= @desdobramento.descricao %>
-</p>
-
 <% if @desdobramento.tipo_agressor.blank? %>
   <p>
     <strong>Tipo:</strong>
@@ -22,6 +17,11 @@
     AGRESSOR -> <%= detalhes2(@desdobramento.tipo_agressor, :descricao) %>
   </p>
 <% end %>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @desdobramento.descricao %>
+</p>
 
 <%= link_to link_icone('voltar'), desdobramentos_path, :class=>'btn btn-default', :title=>"Voltar" %> 
 <%= link_to link_icone('editar'), edit_desdobramento_path(@desdobramento), :class=>"btn btn-primary", :title=>"Editar" %> 

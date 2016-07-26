@@ -2,8 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :descricao %>
-
+    
     <%= f.input :tipo, collection: @lista_tipos, as: :select, :include_blank => true, :input_html => {:value => (@desdobramento.tipo if @desdobramento.tipo)} %>
     
     <div id="atributos_tipo">
@@ -13,6 +12,8 @@
       <%elsif @desdobramento.tipo and @desdobramento.tipo=="TIPO DE AGRESSOR"%>
         <%= f.input :tipo_agressor_id, collection: TipoAgressor.order([:descricao]), :label=>"Tipo de Agressor", label_method: :descricao, value_method: :id, include_blank: true, :input_html => {:value => (@desdobramento.tipo_agressor.descricao if @desdobramento.tipo_agressor)} %>
       <%end%>
+
+      <%= f.input :descricao %>
       
       
     </div>

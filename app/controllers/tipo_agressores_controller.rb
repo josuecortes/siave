@@ -31,7 +31,7 @@ class TipoAgressoresController < ApplicationController
 
     respond_to do |format|
       if @tipo_agressor.save
-        format.html { redirect_to @tipo_agressor, notice: 'Tipo agressor was successfully created.' }
+        format.html { redirect_to @tipo_agressor, notice: @@msgs }
         format.json { render :show, status: :created, location: @tipo_agressor }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class TipoAgressoresController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_agressor.update(tipo_agressor_params)
-        format.html { redirect_to @tipo_agressor, notice: 'Tipo agressor was successfully updated.' }
+        format.html { redirect_to @tipo_agressor, notice: @@msgs }
         format.json { render :show, status: :ok, location: @tipo_agressor }
       else
         format.html { render :edit }
@@ -59,7 +59,7 @@ class TipoAgressoresController < ApplicationController
   def destroy
     @tipo_agressor.destroy
     respond_to do |format|
-      format.html { redirect_to tipo_agressores_url, notice: 'Tipo agressor was successfully destroyed.' }
+      format.html { redirect_to tipo_agressores_url, notice: @@msgs }
       format.json { head :no_content }
     end
   end
